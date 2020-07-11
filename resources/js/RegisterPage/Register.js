@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { connect } from "react-redux";
 
-import { registerUser } from "../actions/authActions";
+import { registerUser } from "../_actions/authActions";
 import { Card, Col, Container, Form, Row} from "react-bootstrap";
-import SubmitButton from "../components/SubmitButton";
+import SubmitButton from "../_components/SubmitButton";
 
 
 const Register = ({ registerUser, serverErrors }) =>{

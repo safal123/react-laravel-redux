@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { connect } from "react-redux";
 
-import { login, socialLogin} from "../actions/authActions";
+import { login, socialLogin} from "../_actions/authActions";
 
 import { Container, Form, Card, Row, Col, Alert } from 'react-bootstrap';
-import SubmitButton from "../components/SubmitButton";
+import SubmitButton from "../_components/SubmitButton";
 import FacebookLogin from 'react-facebook-login';
 import GoogleLogin from 'react-google-login';
 

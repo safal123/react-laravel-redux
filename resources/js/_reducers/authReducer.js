@@ -1,4 +1,4 @@
-import { LOGIN, LOGIN_ERROR, LOGOUT, REGISTER, REGISTER_ERROR } from "../actions/types";
+import { LOGIN, LOGIN_ERROR, LOGOUT, REGISTER, REGISTER_ERROR } from "../_actions/types";
 
 let auth = JSON.parse(localStorage.getItem('auth'));
 const initialState = auth ? { isLoggedIn: true, user: auth.user } : {}

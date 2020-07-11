@@ -3,15 +3,15 @@ import ReactDOM from 'react-dom';
 import { Provider } from "react-redux";
 
 import { history } from "../_helpers";
-import store from "../store";
+import store from "../_store";
 import { Router, Switch, Redirect, Route } from 'react-router-dom';
 
-import Header from "../components/Header";
+import Header from "../_components/Header";
 import Home from "../HomePage/Home";
 import Login from "../LoginPage/Login";
 import Register from "../RegisterPage/Register";
-import PrivateRoute from "../components/PrivateRoute";
-import GuestRoute from "../components/GuestRoute";
+import PrivateRoute from "../_components/PrivateRoute";
+import GuestRoute from "../_components/GuestRoute";
 
 
 function App() {

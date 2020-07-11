@@ -1,6 +1,6 @@
 import React from "react";
 import { Container, Row, Col } from 'react-bootstrap'
-import ProductCard from "../components/ProductCard";
+import ProductCard from "../_components/ProductCard";
 
 const Home =() =>{
     return(
