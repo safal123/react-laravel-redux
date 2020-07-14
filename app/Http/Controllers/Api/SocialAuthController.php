@@ -25,26 +25,22 @@ class SocialAuthController extends Controller
      */
     public function auth()
     {
-        $client = new \Google_Client(['client_id' => env('GOOGLE_CLIENT_ID')]);
-        $payload = $client->verifyIdToken(request('token'));
-        if($payload){
-            if($payload['email_verified']){
-                $user = User::where('email', $payload['email'])->first();
-                if(!$user){
-                    $socialUser = User::create([
-                        'name' => $payload['given_name'] . $payload['family_name'],
-                        'email' => $payload['email']
-                    ]);
-                    $socialUser->socialAccounts()->create([
-                        'provider_id' => $payload['sub'],
-                        'provider' => $payload['iss'],
-                    ]);
-                    return $this->authLogin($socialUser);
-                }
-                return $this->authLogin($user);
-            } else{
-                return response()->json(['error' => 'Invalid email address.'], 401);
+        $payload = $this->payload(request('token'));
+
+        if($payload && $payload['email_verified']){
+            $user = User::where('email', $payload['email'])->first();
+            if(!$user){
+                $socialUser = User::create([
+                    'name' => $payload['given_name'] . $payload['family_name'],
+                    'email' => $payload['email']
+                ]);
+                $socialUser->socialAccounts()->create([
+                    'provider_id' => $payload['sub'],
+                    'provider' => $payload['iss'],
+                ]);
+                return $this->authLogin($socialUser);
             }
+            return $this->authLogin($user);
         } else{
             return response()->json(['error' => 'Invalid response data.'], 401);
         }
@@ -52,15 +48,28 @@ class SocialAuthController extends Controller
 
 
     /**
+     * @param $token
+     * @return array|false
+     */
+    public function payload($token)
+    {
+        $client = new \Google_Client(['client_id' => env('GOOGLE_CLIENT_ID')]);
+        return $client->verifyIdToken($token);
+    }
+
+
+    /**
      * @param Authenticatable $user
-     * @return mixed
+     * @return array
      */
     protected function createToken(Authenticatable $user)
     {
-        $success['token'] = $user->createToken('app')->accessToken;
-        $success['user'] = $user;
-        return $success;
+        return $success = [
+            "token" => $user->createToken('app')->accessToken,
+            "user" => $user
+        ];
     }
+
 
     /**
      * @param $user
@@ -68,10 +77,8 @@ class SocialAuthController extends Controller
      */
     protected function authLogin($user): \Illuminate\Http\JsonResponse
     {
-        if (Auth::loginUsingId($user->id)) {
-            $user = Auth::user();
-            $success = $this->createToken($user);
-            return response()->json(['success' => $success], $this->successStatus);
+        if ($user = Auth::loginUsingId($user->id)) {
+            return response()->json(['success' => $this->createToken($user)], $this->successStatus);
         }
         return response()->json(['error' => 'Invalid email or password'], 401);
     }

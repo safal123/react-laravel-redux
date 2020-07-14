@@ -129,4 +129,6 @@ const mapStateToProps = state =>({
     serverErrors : state.auth.serverErrors,
 })
 
-export default connect(mapStateToProps, { registerUser })(Register);
+const registerPage = connect(mapStateToProps, { registerUser })(Register);
+
+export { registerPage as Register };

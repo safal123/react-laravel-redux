@@ -18,6 +18,9 @@ const Home =() =>{
             </Row>
         </Container>
     );
-}
+};
 
-export default Home;
+// const home = connect(mapStateToProps, mapDispatchToProps)(Home);
+// export { home as Home };
+
+export { Home };

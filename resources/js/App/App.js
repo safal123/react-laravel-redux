@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from "react-redux";
 
@@ -7,14 +7,15 @@ import store from "../_store";
 import { Router, Switch, Redirect, Route } from 'react-router-dom';
 
 import Header from "../_components/Header";
-import Home from "../HomePage/Home";
-import Login from "../LoginPage/Login";
-import Register from "../RegisterPage/Register";
+import { Home } from '../HomePage';
+import { Login } from "../LoginPage";
+import { Register } from "../RegisterPage";
 import PrivateRoute from "../_components/PrivateRoute";
 import GuestRoute from "../_components/GuestRoute";
 
 
 function App() {
+
     return (
         <Router history={history}>
             <Header />
@@ -32,8 +33,10 @@ export default App;
 
 if (document.getElementById('app')) {
     ReactDOM.render(
-        <Provider store={store}>
-            <App />
-        </Provider>,
+        <Suspense fallback={'<h1>Loading...</h1>'}>
+            <Provider store={store}>
+                <App />
+            </Provider>
+        </Suspense>,
         document.getElementById('app'));
 }

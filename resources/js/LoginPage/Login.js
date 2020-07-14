@@ -7,7 +7,6 @@ import { login, socialLogin} from "../_actions/authActions";
 
 import { Container, Form, Card, Row, Col, Alert } from 'react-bootstrap';
 import SubmitButton from "../_components/SubmitButton";
-import FacebookLogin from 'react-facebook-login';
 import GoogleLogin from 'react-google-login';
 
 
@@ -18,18 +17,15 @@ const Login = ({ login, message, socialLogin }) => {
         login(data);
     }
 
-    const responseFacebook = response => {
-        console.log(response);
-    }
-
-    const componentClicked = () => {
-        console.log('I am clicked');
-    }
 
     const responseGoogle = (response) => {
         const token =  response.tokenObj.id_token
         const data = { token };
         socialLogin(data);
+    }
+
+    const responseGoogleFailure = response =>{
+        alert(response.message);
     }
 
     return(
@@ -56,9 +52,9 @@ const Login = ({ login, message, socialLogin }) => {
                                         className={ errors.email ? "is-invalid" :  ""}
                                         placeholder={"Enter email"}/>
                                     { errors.email &&
-                                        <Form.Text className={"text-danger"}>
-                                            { errors.email.message }
-                                        </Form.Text>
+                                    <Form.Text className={"text-danger"}>
+                                        { errors.email.message }
+                                    </Form.Text>
                                     }
                                 </Form.Group>
 
@@ -71,31 +67,24 @@ const Login = ({ login, message, socialLogin }) => {
                                         className={ errors.password ? "is-invalid" :  ""}
                                         placeholder={"Password"} />
                                     { errors.password &&
-                                        <Form.Text className={"text-danger"}>
-                                            { errors.password.message }
-                                        </Form.Text>
+                                    <Form.Text className={"text-danger"}>
+                                        { errors.password.message }
+                                    </Form.Text>
                                     }
                                 </Form.Group>
                                 <SubmitButton text={"Login"} variant={"info"}/>
                                 <Link className="ml-2" to="/register">New user?</Link>
                                 <Link className="ml-4" to="/register">Forget password?</Link>
                             </Form>
-                            <Row className={"justify-content-md-center"}>
-                                <Col className={"mt-5"}>
-                                    <FacebookLogin
-                                        appId="241384187023003"
-                                        autoLoad={false}
-                                        fields="name,email,picture"
-                                        onClick={ componentClicked }
-                                        callback={ responseFacebook } />
-                                </Col>
-                                <Col className={"mt-5"}>
+                            <Row className={""}>
+                                <Col className={"mt-2 d-flex justify-content-center"}>
                                     <GoogleLogin
                                         clientId="514255409927-am5hie4sqpfgdi63eufslf1dskickej5.apps.googleusercontent.com"
                                         buttonText="Login with Google"
                                         onSuccess={responseGoogle}
-                                        onFailure={responseGoogle}
+                                        onFailure={responseGoogleFailure}
                                         cookiePolicy={'single_host_origin'}
+                                        // isSignedIn={true}
                                     />
                                 </Col>
                             </Row>
@@ -111,4 +100,6 @@ const mapStateToProps = state =>({
     message : state.auth.message,
 })
 
-export default connect(mapStateToProps, { login, socialLogin })(Login);
+const loginPage = connect(mapStateToProps, { login, socialLogin })(Login);
+
+export { loginPage as Login };
