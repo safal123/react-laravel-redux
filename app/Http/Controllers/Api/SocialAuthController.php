@@ -19,7 +19,6 @@ class SocialAuthController extends Controller
      */
     public $successStatus = 200;
 
-
     /**
      * @return \Illuminate\Http\JsonResponse
      */
@@ -27,7 +26,7 @@ class SocialAuthController extends Controller
     {
         $payload = $this->payload(request('token'));
 
-        if($payload && $payload['email_verified']){
+        if($payload && $payload['email_verified']) {
             $user = User::where('email', $payload['email'])->first();
             if(!$user){
                 $socialUser = User::create([
@@ -38,14 +37,13 @@ class SocialAuthController extends Controller
                     'provider_id' => $payload['sub'],
                     'provider' => $payload['iss'],
                 ]);
-                return $this->authLogin($socialUser);
+               return $this->authLogin($socialUser);
             }
             return $this->authLogin($user);
         } else{
-            return response()->json(['error' => 'Invalid response data.'], 401);
+            return response()->json(['error' => 'Invalid credentials.'], 401);
         }
     }
-
 
     /**
      * @param $token
@@ -56,7 +54,6 @@ class SocialAuthController extends Controller
         $client = new \Google_Client(['client_id' => env('GOOGLE_CLIENT_ID')]);
         return $client->verifyIdToken($token);
     }
-
 
     /**
      * @param Authenticatable $user

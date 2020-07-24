@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { logout } from "../_actions/authActions";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 
-const Header = ({ isLoggedIn, logout }) =>{
+const Header = ({ isLoggedIn, logout, user }) =>{
     return(
         <Fragment>
             <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
@@ -16,13 +16,6 @@ const Header = ({ isLoggedIn, logout }) =>{
                         <Nav className="mr-auto">
                             <Nav.Link href="#products">Products</Nav.Link>
                             <Nav.Link href="#categories">Categories</Nav.Link>
-                            {/*<NavDropdown title="Dropdown" id="collasible-nav-dropdown">*/}
-                            {/*    <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>*/}
-                            {/*    <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>*/}
-                            {/*    <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>*/}
-                            {/*    <NavDropdown.Divider />*/}
-                            {/*    <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>*/}
-                            {/*</NavDropdown>*/}
                         </Nav>
                         <Nav>
                             { !isLoggedIn ?
@@ -31,7 +24,17 @@ const Header = ({ isLoggedIn, logout }) =>{
                                     <Link className="nav-link" to="/register">Register</Link>
                                 </Fragment>
                                 :
-                                <Link className="nav-link" to="/login" onClick={logout}>Logout</Link>
+                                <Fragment>
+                                    <Link className="nav-link" to="/login" onClick={logout}>Logout</Link>
+                                    <Link className="nav-link" to="/profile">{ user.email }</Link>
+                                    {/*<NavDropdown title={ user.email } id="collasible-nav-dropdown">*/}
+                                    {/*    <NavDropdown.Item>*/}
+                                    {/*    </NavDropdown.Item>*/}
+                                    {/*    <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>*/}
+                                    {/*    <NavDropdown.Divider />*/}
+                                    {/*    <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>*/}
+                                    {/*</NavDropdown>*/}
+                                </Fragment>
                             }
                         </Nav>
                     </Navbar.Collapse>
@@ -42,7 +45,8 @@ const Header = ({ isLoggedIn, logout }) =>{
 }
 
 const mapStateToProps = state =>({
-    isLoggedIn: state.auth.isLoggedIn
+    isLoggedIn: state.auth.isLoggedIn,
+    user: state.auth.user
 })
 
 

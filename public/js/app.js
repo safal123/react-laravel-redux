@@ -89688,7 +89688,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Header__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../_components/Header */ "./resources/js/_components/Header.js");
 /* harmony import */ var _HomePage__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../HomePage */ "./resources/js/HomePage/index.js");
 /* harmony import */ var _LoginPage__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../LoginPage */ "./resources/js/LoginPage/index.js");
-/* harmony import */ var _RegisterPage__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../RegisterPage */ "./resources/js/RegisterPage/index.js");
+/* harmony import */ var _RegisterPage__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../RegisterPage */ "./resources/js/RegisterPage/index.js");
 /* harmony import */ var _components_PrivateRoute__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../_components/PrivateRoute */ "./resources/js/_components/PrivateRoute.js");
 /* harmony import */ var _components_GuestRoute__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../_components/GuestRoute */ "./resources/js/_components/GuestRoute.js");
 
@@ -89707,7 +89707,7 @@ __webpack_require__.r(__webpack_exports__);
 function App() {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__["Router"], {
     history: _helpers__WEBPACK_IMPORTED_MODULE_3__["history"]
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Header__WEBPACK_IMPORTED_MODULE_6__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__["Switch"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_PrivateRoute__WEBPACK_IMPORTED_MODULE_10__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Header__WEBPACK_IMPORTED_MODULE_6__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__["Switch"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__["Route"], {
     path: "/",
     exact: true,
     component: _HomePage__WEBPACK_IMPORTED_MODULE_7__["Home"]
@@ -89718,7 +89718,7 @@ function App() {
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_GuestRoute__WEBPACK_IMPORTED_MODULE_11__["default"], {
     path: "/register",
     exact: true,
-    component: _RegisterPage__WEBPACK_IMPORTED_MODULE_12__["Register"]
+    component: _RegisterPage__WEBPACK_IMPORTED_MODULE_9__["Register"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__["Redirect"], {
     from: "*",
     to: "/"
@@ -89852,7 +89852,7 @@ var Login = function Login(_ref) {
   };
 
   var responseGoogleFailure = function responseGoogleFailure(response) {
-    alert(response.message);
+    alert('Something went wrong.');
   };
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__["Container"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__["Row"], {
@@ -90296,7 +90296,8 @@ __webpack_require__.r(__webpack_exports__);
 
 var Header = function Header(_ref) {
   var isLoggedIn = _ref.isLoggedIn,
-      logout = _ref.logout;
+      logout = _ref.logout,
+      user = _ref.user;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__["Navbar"], {
     collapseOnSelect: true,
     expand: "lg",
@@ -90323,16 +90324,20 @@ var Header = function Header(_ref) {
   }, "Login"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     className: "nav-link",
     to: "/register"
-  }, "Register")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+  }, "Register")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     className: "nav-link",
     to: "/login",
     onClick: logout
-  }, "Logout"))))));
+  }, "Logout"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    className: "nav-link",
+    to: "/profile"
+  }, user.email)))))));
 };
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    isLoggedIn: state.auth.isLoggedIn
+    isLoggedIn: state.auth.isLoggedIn,
+    user: state.auth.user
   };
 };
 
@@ -90459,6 +90464,36 @@ var SubmitButton = function SubmitButton(_ref) {
 
 /***/ }),
 
+/***/ "./resources/js/_helpers/api.js":
+/*!**************************************!*\
+  !*** ./resources/js/_helpers/api.js ***!
+  \**************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+
+var baseApi = axios__WEBPACK_IMPORTED_MODULE_0___default.a.create({
+  baseURL: "http://localhost:8000/api"
+});
+
+var api = function api() {
+  var token = JSON.parse(localStorage.getItem('auth'));
+
+  if (token) {
+    baseApi.defaults.headers.common["Authorization"] = "Bearer ".concat(token.token);
+  }
+
+  return baseApi;
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (api);
+
+/***/ }),
+
 /***/ "./resources/js/_helpers/history.js":
 /*!******************************************!*\
   !*** ./resources/js/_helpers/history.js ***!
@@ -90577,6 +90612,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "authService", function() { return authService; });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _helpers_api__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../_helpers/api */ "./resources/js/_helpers/api.js");
+
 
 var authService = {
   login: login,
@@ -90586,24 +90623,30 @@ var authService = {
 };
 
 function login(data) {
-  return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('http://127.0.0.1:8000/api/login', data).then(function (response) {
+  return Object(_helpers_api__WEBPACK_IMPORTED_MODULE_1__["default"])().post('/login', data).then(function (response) {
     return setUserInfo(response);
   });
 }
 
 function logout() {
-  // Remove user and token from localstorage
-  localStorage.removeItem('auth');
+  console.log(Object(_helpers_api__WEBPACK_IMPORTED_MODULE_1__["default"])());
+  return Object(_helpers_api__WEBPACK_IMPORTED_MODULE_1__["default"])().post('/logout').then(function () {
+    localStorage.removeItem('auth');
+    console.log('Successfully logged out.');
+  })["catch"](function (error) {
+    localStorage.removeItem('auth');
+    console.log(error.response);
+  });
 }
 
 function register(data) {
-  return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('http://127.0.0.1:8000/api/register', data).then(function (response) {
+  return Object(_helpers_api__WEBPACK_IMPORTED_MODULE_1__["default"])().post('/register', data).then(function (response) {
     return setUserInfo(response);
   });
 }
 
 function socialAuthLogin(data) {
-  return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("http://localhost:8000/api/login/google", data).then(function (response) {
+  return Object(_helpers_api__WEBPACK_IMPORTED_MODULE_1__["default"])().post('/login/google', data).then(function (response) {
     return setUserInfo(response);
   });
 }

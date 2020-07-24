@@ -28,7 +28,6 @@ class ProductsTableSeeder extends Seeder
         \App\Product::create([
             'name' => 'Iphone 7',
             'description' => 'Iphone 7 is very cool and smart.',
-            'image' => 'https://picsum.photos/100/100',
             'price' => 1049.99
         ]);
     }

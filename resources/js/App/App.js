@@ -20,7 +20,7 @@ function App() {
         <Router history={history}>
             <Header />
             <Switch>
-                <PrivateRoute path={"/"} exact={true} component={Home}/>
+                <Route path={"/"} exact={true} component={Home}/>
                 <GuestRoute path={"/login"} exact={true} component={Login}/>
                 <GuestRoute path={"/register"} exact={true} component={Register}/>
                 <Redirect from="*" to="/" />

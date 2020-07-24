@@ -4,12 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\RegisterUserRequest;
-use App\SocialAccount;
 use App\User;
 use Illuminate\Contracts\Auth\Authenticatable;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Laravel\Socialite\Facades\Socialite;
 
 class AuthController extends Controller
 {
@@ -35,6 +32,14 @@ class AuthController extends Controller
         }
         return response()->json(['error' => 'Something went wrong'], 400);
 
+    }
+
+    public function logout()
+    {
+        if(!Auth::user()->token()->delete()){
+            return response()->json(['message' => 'Something went wrong.']);
+        }
+        return response()->json(['message' => 'Successfully logged out.']);
     }
 
 

@@ -16,13 +16,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('login', 'Api\AuthController@login');
 Route::post('register', 'Api\AuthController@register');
-
 Route::post('login/google', 'Api\SocialAuthController@auth');
-
-//Route::get('login/{provider}', 'Api\AuthController@redirectToProvider');
-//Route::get('login/{provider}/callback', 'Api\AuthController@handleProviderCallback');
-
-
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+//Route::middleware('auth:api')->get('/user', function (Request $request) {
+//    return $request->user();
+//});
+Route::middleware(['auth:api'])->group( function (){
+    Route::post('logout', 'Api\AuthController@logout');
 });
+
