@@ -25,7 +25,7 @@ const Login = ({ login, message, socialLogin }) => {
     }
 
     const responseGoogleFailure = response =>{
-        alert('Something went wrong.');
+        console.log(response);
     }
 
     return(

@@ -89852,7 +89852,7 @@ var Login = function Login(_ref) {
   };
 
   var responseGoogleFailure = function responseGoogleFailure(response) {
-    alert('Something went wrong.');
+    console.log(response);
   };
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__["Container"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__["Row"], {
