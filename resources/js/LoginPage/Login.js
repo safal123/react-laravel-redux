@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 
 import { login, socialLogin} from "../_actions/authActions";
 
-import { Container, Form, Card, Row, Col, Alert } from 'react-bootstrap';
+import {Container, Form, Card, Row, Col, Alert, Spinner} from 'react-bootstrap';
 import SubmitButton from "../_components/SubmitButton";
 import GoogleLogin from 'react-google-login';
 
