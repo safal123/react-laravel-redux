@@ -1,4 +1,3 @@
-import axios from "axios";
 import api from "../_helpers/api";
 
 export const authService = {

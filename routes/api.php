@@ -17,10 +17,14 @@ use Illuminate\Support\Facades\Route;
 Route::post('login', 'Api\AuthController@login');
 Route::post('register', 'Api\AuthController@register');
 Route::post('login/google', 'Api\SocialAuthController@auth');
-//Route::middleware('auth:api')->get('/user', function (Request $request) {
-//    return $request->user();
-//});
+
+Route::get('products', 'Api\ProductController@index');
+Route::post('carts/add/{product}', 'Api\CartController@add_item_to_cart');
+
 Route::middleware(['auth:api'])->group( function (){
     Route::post('logout', 'Api\AuthController@logout');
+    Route::get('user', function (Request $request){
+        return $request->user();
+    });
 });
 

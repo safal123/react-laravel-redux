@@ -98,7 +98,7 @@ const Login = ({ login, message, socialLogin }) => {
 
 const mapStateToProps = state =>({
     message : state.auth.message,
-})
+});
 
 const loginPage = connect(mapStateToProps, { login, socialLogin })(Login);
 

@@ -3,7 +3,6 @@ import { authService } from "../_services";
 import { LOGIN, LOGIN_ERROR, LOGOUT, REGISTER, REGISTER_ERROR } from "./types";
 import { history } from "../_helpers";
 
-
 export const  login = data => {
     return dispatch => {
         authService.login(data)

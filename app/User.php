@@ -42,4 +42,11 @@ class User extends Authenticatable
     {
         return $this->hasMany(SocialAccount::class);
     }
+
+//    One to many relationship with cart model.
+//    User can have many carts and a cart belongs to a user.
+    public function carts()
+    {
+        return $this->hasMany(Cart::class);
+    }
 }
