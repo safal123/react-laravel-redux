@@ -4,8 +4,9 @@ import { connect } from 'react-redux';
 
 import { logout } from "../_actions/authActions";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
+import { FaShoppingCart, FaUser } from "react-icons/all";
 
-const Header = ({ isLoggedIn, logout, user }) =>{
+const Header = ({ auth, logout, cartTotalItems }) =>{
     return(
         <Fragment>
             <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
@@ -14,26 +15,26 @@ const Header = ({ isLoggedIn, logout, user }) =>{
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="mr-auto">
-                            <Nav.Link href="#products">Products</Nav.Link>
-                            <Nav.Link href="#categories">Categories</Nav.Link>
+                            {/*<Nav.Link href="#products">Products</Nav.Link>*/}
+                            {/*<Nav.Link href="#categories">Categories</Nav.Link>*/}
                         </Nav>
                         <Nav>
-                            { !isLoggedIn ?
+                            <Link className="nav-link" to="/cart">
+                                <FaShoppingCart size={"1rem"}/>
+                                <span className="badge badge-danger ml-1">{ cartTotalItems  }</span>
+                            </Link>
+                            { !auth.isLoggedIn ?
                                 <Fragment>
                                     <Link className="nav-link" to="/login">Login</Link>
                                     <Link className="nav-link" to="/register">Register</Link>
                                 </Fragment>
                                 :
                                 <Fragment>
-                                    <Link className="nav-link" to="/login" onClick={logout}>Logout</Link>
-                                    <Link className="nav-link" to="/profile">{ user.email }</Link>
-                                    {/*<NavDropdown title={ user.email } id="collasible-nav-dropdown">*/}
-                                    {/*    <NavDropdown.Item>*/}
-                                    {/*    </NavDropdown.Item>*/}
-                                    {/*    <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>*/}
-                                    {/*    <NavDropdown.Divider />*/}
-                                    {/*    <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>*/}
-                                    {/*</NavDropdown>*/}
+                                    <NavDropdown title={ <FaUser size={"1rem"}/> }>
+                                        <Link className="dropdown-item" to="/login" onClick={logout}>Logout</Link>
+                                        <NavDropdown.Divider />
+                                        <Link className="dropdown-item" to="/profile">Profile</Link>
+                                    </NavDropdown>
                                 </Fragment>
                             }
                         </Nav>
@@ -45,9 +46,9 @@ const Header = ({ isLoggedIn, logout, user }) =>{
 }
 
 const mapStateToProps = state =>({
-    isLoggedIn: state.auth.isLoggedIn,
-    user: state.auth.user
+    // isLoggedIn: state.auth.isLoggedIn,
+    auth: state.auth,
+    cartTotalItems: state.cart.totalItems
 })
-
 
 export default connect(mapStateToProps, { logout })(Header);

@@ -10,19 +10,21 @@ import Header from "../_components/Header";
 import { Home } from '../HomePage';
 import { Login } from "../LoginPage";
 import { Register } from "../RegisterPage";
+
 import PrivateRoute from "../_components/PrivateRoute";
 import GuestRoute from "../_components/GuestRoute";
+import { Cart } from "../Cart";
 
 
 function App() {
-
     return (
         <Router history={history}>
             <Header />
             <Switch>
-                <Route path={"/"} exact={true} component={Home}/>
-                <GuestRoute path={"/login"} exact={true} component={Login}/>
-                <GuestRoute path={"/register"} exact={true} component={Register}/>
+                <Route path={"/"} exact={true} component={ Home }/>
+                <GuestRoute path={"/login"} exact={true} component={ Login }/>
+                <GuestRoute path={"/register"} exact={true} component={ Register }/>
+                <Route path={"/cart"} exact={true} component={ Cart }/>
                 <Redirect from="*" to="/" />
             </Switch>
         </Router>

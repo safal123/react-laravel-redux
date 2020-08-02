@@ -1,8 +1,9 @@
-import { productService } from "../_services/product.service";
+import { productService } from "../_services";
+
 import {
-    PRODUCT_FETCH_REQUEST,
-    PRODUCT_FETCH_SUCCESS,
-    PRODUCT_FETCH_FAILURE} from "./types";
+    PRODUCTS_FETCH_REQUEST,
+    PRODUCTS_FETCH_SUCCESS,
+    PRODUCTS_FETCH_FAILURE} from "./types";
 
 export const allProducts = ()  =>{
     return dispatch => {
@@ -16,8 +17,8 @@ export const allProducts = ()  =>{
                 //dispatch alert actions
         });
     };
-    function request() { return { type: PRODUCT_FETCH_REQUEST } }
-    function success(products) { return { type: PRODUCT_FETCH_SUCCESS, payload: products } }
-    function failure(error) { return { type: PRODUCT_FETCH_FAILURE, payload: error } }
+    function request() { return { type: PRODUCTS_FETCH_REQUEST } }
+    function success(products) { return { type: PRODUCTS_FETCH_SUCCESS, payload: products } }
+    function failure(error) { return { type: PRODUCTS_FETCH_FAILURE, payload: error } }
 }
 

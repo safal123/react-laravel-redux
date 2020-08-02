@@ -9,7 +9,7 @@
     <title>Shop Online</title>
 </head>
 <body style="background-color: #c2d8de59 ">
-    <div id="app"></div>
+    <div id="app">Loading please wait...</div>
     <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>

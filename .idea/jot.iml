@@ -130,5 +130,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="Sites" />
     <orderEntry type="module" module-name="react-front" />
+    <orderEntry type="module" module-name="shoping-cart" />
   </component>
 </module>

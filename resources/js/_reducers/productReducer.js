@@ -1,21 +1,22 @@
 import {
-    PRODUCT_FETCH_REQUEST,
-    PRODUCT_FETCH_SUCCESS,
-    PRODUCT_FETCH_FAILURE} from "../_actions/types";
+    PRODUCTS_FETCH_REQUEST,
+    PRODUCTS_FETCH_SUCCESS,
+    PRODUCTS_FETCH_FAILURE
+} from "../_actions/types";
 
 const initialState = {};
 
 export default function (state = initialState, action) {
     switch (action.type) {
-        case PRODUCT_FETCH_REQUEST:
+        case PRODUCTS_FETCH_REQUEST:
             return{
                 isLoading: true
             }
-        case PRODUCT_FETCH_SUCCESS:
+        case PRODUCTS_FETCH_SUCCESS:
             return{
                 products: action.payload
             }
-        case PRODUCT_FETCH_FAILURE:
+        case PRODUCTS_FETCH_FAILURE:
             return{
                 error: action.payload
             }
