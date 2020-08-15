@@ -3,7 +3,8 @@ import { productService } from "../_services";
 import {
     PRODUCTS_FETCH_REQUEST,
     PRODUCTS_FETCH_SUCCESS,
-    PRODUCTS_FETCH_FAILURE} from "./types";
+    PRODUCTS_FETCH_FAILURE, ALERT_SUCCESS
+} from "./types";
 
 export const allProducts = ()  =>{
     return dispatch => {

@@ -7,6 +7,7 @@ use App\Http\Requests\Api\RegisterUserRequest;
 use App\User;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Support\Facades\Auth;
+use function request;
 
 class AuthController extends Controller
 {
@@ -14,7 +15,7 @@ class AuthController extends Controller
 
     public function login()
     {
-        if(Auth::attempt(['email'=>\request('email'), 'password' =>\request('password')])){
+        if(Auth::attempt(['email'=> request('email'), 'password' => request('password')])){
             $user = Auth::user();
             $success = $this->createToken($user);
             return response()->json(['success' => $success], $this->successStatus);

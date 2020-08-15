@@ -1,25 +1,32 @@
-import React, { Suspense } from 'react';
-import ReactDOM from 'react-dom';
-import { Provider } from "react-redux";
-
+import React, { useEffect } from 'react';
 import { history } from "../_helpers";
-import store from "../_store";
 import { Router, Switch, Redirect, Route } from 'react-router-dom';
-
+import { connect } from 'react-redux';
 import Header from "../_components/Header";
 import { Home } from '../HomePage';
 import { Login } from "../LoginPage";
 import { Register } from "../RegisterPage";
-
 import PrivateRoute from "../_components/PrivateRoute";
 import GuestRoute from "../_components/GuestRoute";
 import { Cart } from "../Cart";
+import { clear } from "../_actions/alert.action";
+import Alert from "../_components/Alert/Alert";
+import './App.css';
 
 
-function App() {
+function App({ alert, clear }) {
+    useEffect(() => {
+        // history.listen((location, action) => {
+        //     clear();
+        // });
+    },[]);
+
     return (
         <Router history={history}>
             <Header />
+            {alert.message &&
+                <Alert alert={alert} clear={clear} />
+            }
             <Switch>
                 <Route path={"/"} exact={true} component={ Home }/>
                 <GuestRoute path={"/login"} exact={true} component={ Login }/>
@@ -31,14 +38,10 @@ function App() {
     );
 }
 
-export default App;
+const mapStateToProps = state =>({
+    alert : state.alert,
+});
 
-if (document.getElementById('app')) {
-    ReactDOM.render(
-        <Suspense fallback={'<h1>Loading...</h1>'}>
-            <Provider store={store}>
-                <App />
-            </Provider>
-        </Suspense>,
-        document.getElementById('app'));
-}
+export default connect(mapStateToProps, { clear })(App);
+
+

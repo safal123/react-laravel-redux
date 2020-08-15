@@ -13,7 +13,7 @@ const Home = ({ allProducts, products, addToCart }) =>{
         allProducts();
     }, [])
     return(
-        <Container className="mt-2">
+        <Container className={"mt-0"}>
             <Row className="justify-content-md-center">
                 { products &&
                     products.map(product =>(

@@ -2,6 +2,7 @@ import { authService } from "../_services";
 
 import { LOGIN, LOGIN_ERROR, LOGOUT, REGISTER, REGISTER_ERROR } from "./types";
 import { history } from "../_helpers";
+import { success as alertSuccess } from "./alert.action";
 
 export const  login = data => {
     return dispatch => {
@@ -9,6 +10,7 @@ export const  login = data => {
             .then(
                 auth => {
                     dispatch(success(auth.user));
+                    dispatch(alertSuccess("Logged in successfully."));
                     history.push('/');
                 })
             .catch(err => {
@@ -31,15 +33,14 @@ export const  socialLogin = data => {
             .then(
                 auth => {
                     dispatch(success(auth.user));
+                    dispatch(alertSuccess("Logged in successfully."));
                     history.push('/');
                 })
             .catch(err => {
                 dispatch(error(err.response.data.error));
             });
 
-        function success(user) {
-            return {type: LOGIN, payload: user};
-        }
+        function success(user) {return {type: LOGIN, payload: user}}
 
         function error(errors) {
             return {type: LOGIN_ERROR, payload: errors};
@@ -49,8 +50,8 @@ export const  socialLogin = data => {
 
 export const logout = ()  => {
     authService.logout();
-    return {
-        type: LOGOUT
+    return  {
+        type: LOGOUT,
     };
 
 }
