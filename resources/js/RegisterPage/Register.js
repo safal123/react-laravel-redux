@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React, {useRef, useState} from 'react';
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { connect } from "react-redux";
@@ -18,7 +18,6 @@ const Register = ({ registerUser, serverErrors }) =>{
         registerUser(data);
     }
 
-
     return(
         <Container>
             <Row className="justify-content-md-center">
@@ -28,7 +27,6 @@ const Register = ({ registerUser, serverErrors }) =>{
                             <h3>Register</h3>
                         </Card.Header>
                         <Card.Body>
-
                             <Form onSubmit={handleSubmit(onSubmit)}>
                                 <Form.Group controlId="formBasicFullName">
                                     <Form.Label>Full Name</Form.Label>

@@ -16,7 +16,6 @@ function login(data) {
 }
 
 function logout() {
-    console.log(api());
     return api().post('/logout')
         .then(() => {
             localStorage.removeItem('auth');

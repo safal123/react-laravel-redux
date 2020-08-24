@@ -5,3 +5,34 @@ body {
 .btn {
     border-radius: 0px !important;
 }
+
+.card {
+    border-radius: 0px !important;
+}
+
+input:read-only {
+    cursor: pointer;
+    background-color: whitesmoke !important;
+}
+
+.order-header{
+    border-bottom: 1px solid white;
+}
+
+.cart-items {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+    background-color: whitesmoke;
+    margin-bottom: 1px;
+    padding: 10px 10px;
+}
+
+.cart-total{
+    display: flex;
+    padding: 10px 10px;
+    background-color: whitesmoke;
+    width: 100%;
+}

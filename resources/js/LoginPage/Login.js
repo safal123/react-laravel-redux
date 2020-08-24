@@ -16,8 +16,7 @@ const Login = ({ login, message, socialLogin }) => {
     const onsubmit = (data) =>{
         login(data);
     }
-
-
+    
     const responseGoogle = (response) => {
         const token =  response.tokenObj.id_token
         const data = { token };
