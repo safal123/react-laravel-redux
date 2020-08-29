@@ -6,20 +6,23 @@ import {
     REMOVE_CART_ITEM, PRODUCTS_FETCH_REQUEST
 } from "./types";
 
-import { productService } from "../_services";
-import { success } from "./alert.action";
+import {productService} from "../_services";
+import {success} from "./alert.action";
 
 export const addToCart = (id) => {
     return dispatch => {
         productService.findById(id)
-            .then(response =>{
+            .then(response => {
                 dispatch(addToCart(response.data.product));
                 dispatch(success("Product added to cart successfully."));
             })
             .catch(error => {
                 console.log(error);
             })
-        function addToCart(product) { return { type: ADD_TO_CART, payload: product } }
+
+        function addToCart(product) {
+            return {type: ADD_TO_CART, payload: product}
+        }
     }
 }
 
@@ -28,7 +31,10 @@ export const removeFromCart = (product) => {
         dispatch(removeItem(product));
         dispatch(success("Product removed from cart successfully."));
     }
-    function removeItem(product){return {type: REMOVE_CART_ITEM, payload: product}}
+
+    function removeItem(product) {
+        return {type: REMOVE_CART_ITEM, payload: product}
+    }
 }
 
 export const clearCart = () => {
@@ -36,7 +42,10 @@ export const clearCart = () => {
         dispatch(clear());
         dispatch(success("Cart cleared successfully."))
     }
-    function clear(){return{ type: CLEAR_CART, payload: "Your cart is cleared."}}
+
+    function clear() {
+        return {type: CLEAR_CART, payload: "Your cart is cleared."}
+    }
 }
 
 export const increaseItem = (product) => {
@@ -44,7 +53,10 @@ export const increaseItem = (product) => {
         dispatch(increase(product));
         dispatch(success(("Product quantity increased successfully.")))
     }
-    function increase(product){return{ type: INCREASE_CART_ITEM, payload: product}}
+
+    function increase(product) {
+        return {type: INCREASE_CART_ITEM, payload: product}
+    }
 }
 
 export const decreaseItem = (product) => {
@@ -52,5 +64,8 @@ export const decreaseItem = (product) => {
         dispatch(decrease(product));
         dispatch(success(("Product quantity decreased successfully.")))
     }
-    function decrease(product){return{ type: DECREASE_CART_ITEM, payload: product}}
+
+    function decrease(product) {
+        return {type: DECREASE_CART_ITEM, payload: product}
+    }
 }

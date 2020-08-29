@@ -1,4 +1,5 @@
 import api from "../_helpers/api";
+import {history} from "../_helpers";
 
 export const authService = {
     login,
@@ -10,7 +11,7 @@ export const authService = {
 
 function login(data) {
     return api().post('/login', data)
-        .then(response =>{
+        .then(response => {
             return setUserInfo(response);
         });
 }
@@ -20,7 +21,7 @@ function logout() {
         .then(() => {
             localStorage.removeItem('auth');
             console.log('Successfully logged out.')
-        }).catch(error =>{
+        }).catch(error => {
             localStorage.removeItem('auth');
             console.log(error.response);
         })
@@ -34,10 +35,10 @@ function register(data) {
 }
 
 function socialAuthLogin(data) {
-    return api().post('/login/google', data )
-        .then(response =>{
+    return api().post('/login/google', data)
+        .then(response => {
             return setUserInfo(response);
-    })
+        })
 }
 
 function setUserInfo(response) {

@@ -3,13 +3,14 @@ import {useForm} from "react-hook-form";
 import {CardElement, useStripe, useElements} from "@stripe/react-stripe-js";
 import {Form, Spinner} from "react-bootstrap";
 
-const CheckoutForm = ({auth, cart}) => {
+const CheckoutForm = ({auth, cart, checkout}) => {
     const {register, handleSubmit, errors} = useForm();
     const stripe = useStripe();
     const elements = useElements();
     const [error, setError] = useState(null);
     const [processing, setProcessing] = useState(false);
-    const {name, email} = auth.user;
+    const [name, setName] = useState(auth.user ? auth.user.name : null)
+    const [email, setEmail] = useState(auth.user ? auth.user.email : null)
 
     const onSubmit = async (data) => {
         if (!stripe || !elements) {
@@ -17,25 +18,22 @@ const CheckoutForm = ({auth, cart}) => {
         }
         setProcessing(true);
         const cardElement = elements.getElement(CardElement);
-        const {error, paymentMethod} = await stripe.createPaymentMethod({
-            type: 'card',
-            card: cardElement,
-        });
+        const {token, error} = await stripe.createToken(cardElement);
         if (error) {
-            console.log(error);
+            setProcessing(false);
             setError(error.message);
         } else {
             setError(null);
-            paymentMethod.billing_details = {
+            token.billing_details = {
                 "email": data.email,
                 "address": data.address,
                 "name": data.name,
                 "phone": data.phone
             };
-            paymentMethod.metadata = cart;
-            console.log('[PaymentMethod]', paymentMethod);
+            token.cart = cart;
+            setProcessing(false);
+            checkout(token);
         }
-        setProcessing(false);
     }
 
     return (
@@ -120,7 +118,6 @@ const CheckoutForm = ({auth, cart}) => {
                                 options={{
                                     style: {
                                         base: {
-                                            border: '10px',
                                             fontSize: '16px',
                                             color: '#424770',
                                             '::placeholder': {

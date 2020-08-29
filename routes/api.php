@@ -21,6 +21,7 @@ Route::post('login/google', 'Api\SocialAuthController@auth');
 Route::get('products', 'Api\ProductController@index');
 Route::get('products/{id}', 'Api\ProductController@get');
 Route::post('carts/add/{product}', 'Api\CartController@add_item_to_cart');
+Route::post('/checkout', 'Api\CheckoutController@checkout');
 
 Route::middleware(['auth:api'])->group( function (){
     Route::post('logout', 'Api\AuthController@logout');

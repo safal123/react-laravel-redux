@@ -1,10 +1,10 @@
-import { authService } from "../_services";
+import {authService} from "../_services";
 
-import { LOGIN, LOGIN_ERROR, LOGOUT, REGISTER, REGISTER_ERROR } from "./types";
-import { history } from "../_helpers";
-import { success as alertSuccess } from "./alert.action";
+import {LOGIN, LOGIN_ERROR, LOGOUT, REGISTER, REGISTER_ERROR} from "./types";
+import {history} from "../_helpers";
+import {success as alertSuccess} from "./alert.action";
 
-export const  login = data => {
+export const login = data => {
     return dispatch => {
         authService.login(data)
             .then(
@@ -27,7 +27,7 @@ export const  login = data => {
     };
 }
 
-export const  socialLogin = data => {
+export const socialLogin = data => {
     return dispatch => {
         authService.socialAuthLogin(data)
             .then(
@@ -40,7 +40,9 @@ export const  socialLogin = data => {
                 dispatch(error(err.response.data.error));
             });
 
-        function success(user) {return {type: LOGIN, payload: user}}
+        function success(user) {
+            return {type: LOGIN, payload: user}
+        }
 
         function error(errors) {
             return {type: LOGIN_ERROR, payload: errors};
@@ -48,23 +50,29 @@ export const  socialLogin = data => {
     };
 }
 
-export const logout = ()  => {
+export const logout = () => {
     authService.logout();
-    return  {
+    return {
         type: LOGOUT,
     };
 
 }
 
-export const registerUser = data => dispatch =>{
+export const registerUser = data => dispatch => {
     authService.register(data)
-        .then( auth => {
+        .then(auth => {
             dispatch(success(auth.user));
             history.push('/');
         })
-        .catch(err =>{
+        .catch(err => {
             dispatch(error(err.response.data.errors));
         });
-    function success(user) {return { type: REGISTER, payload: user };}
-    function error(errors) {return { type: REGISTER_ERROR, payload: errors };}
+
+    function success(user) {
+        return {type: REGISTER, payload: user};
+    }
+
+    function error(errors) {
+        return {type: REGISTER_ERROR, payload: errors};
+    }
 }
