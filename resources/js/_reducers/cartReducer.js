@@ -30,8 +30,7 @@ const cartReducer = (state = initialState, action) => {
                     totalItems: itemCount,
                     totalPrice: priceSum,
                 }
-            }
-            else {
+            } else {
                 action.payload.quantity = 0;
                 action.payload.inCart = true;
                 action.payload.quantity += 1;
