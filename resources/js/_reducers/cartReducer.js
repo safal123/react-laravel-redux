@@ -23,7 +23,7 @@ const cartReducer = (state = initialState, action) => {
                     ...state,
                     items: state.items,
                     totalItems: state.totalItems + 1,
-                    totalPrice: state.totalPrice + action.payload.price,
+                    totalPrice: (state.totalPrice + action.payload.price),
                 }
             } else {
                 action.payload.quantity = 1;
@@ -33,7 +33,7 @@ const cartReducer = (state = initialState, action) => {
                     ...state,
                     items: [...new Set(items)],
                     totalItems: state.totalItems + 1,
-                    totalPrice: state.totalPrice + action.payload.price,
+                    totalPrice: (state.totalPrice + action.payload.price),
                 }
             }
 
@@ -43,7 +43,7 @@ const cartReducer = (state = initialState, action) => {
             return {
                 ...state,
                 items: state.items.filter(item => action.payload.id !== item.id),
-                totalPrice: state.totalPrice - (itemToRemove.price * itemToRemove.quantity),
+                totalPrice: (state.totalPrice - (itemToRemove.price * itemToRemove.quantity)),
                 totalItems: state.totalItems - itemToRemove.quantity
             }
 
@@ -58,7 +58,7 @@ const cartReducer = (state = initialState, action) => {
             return {
                 ...state,
                 totalItems: state.totalItems + 1,
-                totalPrice: state.totalPrice + action.payload.price,
+                totalPrice: (state.totalPrice + action.payload.price),
             }
 
         case DECREASE_CART_ITEM:
@@ -68,13 +68,13 @@ const cartReducer = (state = initialState, action) => {
                     ...state,
                     items: state.items.filter(item => action.payload.id !== item.id),
                     totalItems: state.totalItems - 1,
-                    totalPrice: state.totalPrice - action.payload.price,
+                    totalPrice: (state.totalPrice - action.payload.price),
                 }
             }
             return {
                 ...state,
                 totalItems: state.totalItems - 1,
-                totalPrice: state.totalPrice - action.payload.price,
+                totalPrice: (state.totalPrice - action.payload.price),
             }
 
         default:
