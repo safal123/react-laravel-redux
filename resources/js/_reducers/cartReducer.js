@@ -1,10 +1,4 @@
-import {
-    ADD_TO_CART,
-    INCREASE_CART_ITEM,
-    DECREASE_CART_ITEM,
-    CLEAR_CART,
-    REMOVE_CART_ITEM
-} from "../_actions/types";
+import {ADD_TO_CART, CLEAR_CART, DECREASE_CART_ITEM, INCREASE_CART_ITEM, REMOVE_CART_ITEM} from "../_actions/types";
 
 const initialState = {
     items: [],
@@ -23,7 +17,7 @@ const cartReducer = (state = initialState, action) => {
                     ...state,
                     items: state.items,
                     totalItems: state.totalItems + 1,
-                    totalPrice: (state.totalPrice + action.payload.price),
+                    totalPrice: parseFloat(state.totalPrice)+parseFloat(action.payload.price),
                 }
             } else {
                 action.payload.quantity = 1;
@@ -33,17 +27,18 @@ const cartReducer = (state = initialState, action) => {
                     ...state,
                     items: [...new Set(items)],
                     totalItems: state.totalItems + 1,
-                    totalPrice: (state.totalPrice + action.payload.price),
+                    totalPrice: parseFloat(state.totalPrice)+parseFloat(action.payload.price),
                 }
             }
 
         // remove an item from cart
         case REMOVE_CART_ITEM:
             let itemToRemove = state.items.find(item => item.id === action.payload.id);
+            const {price, quantity} = itemToRemove;
             return {
                 ...state,
                 items: state.items.filter(item => action.payload.id !== item.id),
-                totalPrice: (state.totalPrice - (itemToRemove.price * itemToRemove.quantity)),
+                totalPrice: parseFloat(state.totalPrice)-(parseFloat(price)*parseFloat(quantity)),
                 totalItems: state.totalItems - itemToRemove.quantity
             }
 
@@ -58,7 +53,7 @@ const cartReducer = (state = initialState, action) => {
             return {
                 ...state,
                 totalItems: state.totalItems + 1,
-                totalPrice: (state.totalPrice + action.payload.price),
+                totalPrice: parseFloat(state.totalPrice)+parseFloat(action.payload.price),
             }
 
         case DECREASE_CART_ITEM:
@@ -68,13 +63,13 @@ const cartReducer = (state = initialState, action) => {
                     ...state,
                     items: state.items.filter(item => action.payload.id !== item.id),
                     totalItems: state.totalItems - 1,
-                    totalPrice: (state.totalPrice - action.payload.price),
+                    totalPrice: parseFloat(state.totalPrice)-parseFloat(action.payload.price),
                 }
             }
             return {
                 ...state,
                 totalItems: state.totalItems - 1,
-                totalPrice: (state.totalPrice - action.payload.price),
+                totalPrice: parseFloat(state.totalPrice)-parseFloat(action.payload.price),
             }
 
         default:
