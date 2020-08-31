@@ -18,10 +18,10 @@ import Checkout from "../Checkout/Checkout";
 function App({alert, clear}) {
     return (
         <Router history={history}>
-            <Header/>
             {alert.message &&
             <Alert alert={alert} clear={clear}/>
             }
+            <Header/>
             <Switch>
                 <Route path={"/"} exact={true} component={Home}/>
                 <GuestRoute path={"/login"} exact={true} component={Login}/>

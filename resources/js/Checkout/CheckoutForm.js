@@ -2,6 +2,7 @@ import React, {useState, Fragment, useEffect} from 'react';
 import {useForm} from "react-hook-form";
 import {CardElement, useStripe, useElements} from "@stripe/react-stripe-js";
 import {Form, Spinner} from "react-bootstrap";
+import {Link} from "react-router-dom";
 
 const CheckoutForm = ({auth, cart, checkout}) => {
     const {register, handleSubmit, errors} = useForm();
@@ -137,7 +138,7 @@ const CheckoutForm = ({auth, cart, checkout}) => {
                         </Form.Text>
                         }
                     </Form.Group>
-                    <button className={"btn btn-info"} disabled={!stripe || processing}>
+                    <button className={"btn btn-primary"} disabled={!stripe || processing}>
                         {processing ?
                             <Fragment>
                                 <Spinner
@@ -151,10 +152,13 @@ const CheckoutForm = ({auth, cart, checkout}) => {
                             </Fragment>
                             :
                             <Fragment>
-                                Checkout
+                                Pay now
                             </Fragment>
                         }
                     </button>
+                    <Link to={"/"} className={"btn btn-info mr-1 ml-1"}>Continue
+                        Shopping
+                    </Link>
                 </Form>
             </div>
         </div>

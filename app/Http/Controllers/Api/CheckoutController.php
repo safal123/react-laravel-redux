@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\SendOrderEmailJob;
+use App\Mail\OrderPlaced;
 use App\Order;
+use Illuminate\Support\Facades\Mail;
 use Stripe;
 use Auth;
 use Illuminate\Support\Facades\DB;
@@ -13,7 +16,7 @@ class CheckoutController extends Controller
 {
     public function __construct(Request $request)
     {
-        if($request->header('Authorization')){
+        if ($request->header('Authorization')) {
             $this->middleware('client.credentials')->only(['checkout']);
         }
     }
@@ -57,11 +60,11 @@ class CheckoutController extends Controller
                 ]);
             }
             DB::commit();
+            SendOrderEmailJob::dispatch($order);
             return response()->json($charge['status'], 200);
-        } catch (\Exception $e){
+        } catch (\Exception $e) {
             DB::rollback();
             return response()->json($e->getMessage(), 502);
         }
-
     }
 }
