@@ -71,7 +71,6 @@ const cartReducer = (state = initialState, action) => {
                 totalItems: state.totalItems - 1,
                 totalPrice: parseFloat(state.totalPrice)-parseFloat(action.payload.price),
             }
-
         default:
             return state;
     }

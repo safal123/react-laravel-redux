@@ -6,13 +6,14 @@ import Header from "../_components/Header/Header";
 import {Home} from '../HomePage';
 import {Login} from "../LoginPage";
 import {Register} from "../RegisterPage";
-// import PrivateRoute from "../_components/Route/PrivateRoute";
+import PrivateRoute from "../_components/Route/PrivateRoute";
 import GuestRoute from "../_components/Route/GuestRoute";
 import {Cart} from "../Cart";
 import {clear} from "../_actions/alert.action";
 import Alert from "../_components/Alert/Alert";
 import './App.css';
 import Checkout from "../Checkout/Checkout";
+import {Account} from "../Account";
 
 
 function App({alert, clear}) {
@@ -28,6 +29,7 @@ function App({alert, clear}) {
                 <GuestRoute path={"/register"} exact={true} component={Register}/>
                 <Route path={"/cart"} exact={true} component={Cart}/>
                 <Route path={"/checkout"} exact={true} component={Checkout}/>
+                <PrivateRoute path={"/account"} exact={true} component={Account} />
                 <Redirect from="*" to="/"/>
             </Switch>
 

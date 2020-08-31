@@ -12,10 +12,10 @@ const Cart = ({cart, clearCart, increaseItem, decreaseItem, removeFromCart}) => 
         <Fragment>
             <Container className={"mt-2"}>
                 <Card style={{borderRadius: "0px"}}>
+                    <Card.Header>
+                        Your cart.
+                    </Card.Header>
                     <Card.Body>
-                        <Card.Title>
-                            Your cart.
-                        </Card.Title>
                         {cart.items.length > 0 ?
                             <Table responsive>
                                 <thead>

@@ -7,7 +7,7 @@ import {
 } from "./types";
 
 import {productService} from "../_services";
-import {success} from "./alert.action";
+import {success, error} from "./alert.action";
 
 export const addToCart = (id) => {
     return dispatch => {
@@ -40,9 +40,8 @@ export const removeFromCart = (product) => {
 export const clearCart = () => {
     return dispatch => {
         dispatch(clear());
-        dispatch(success("Cart cleared successfully."))
+        dispatch(error("Cart cleared successfully."))
     }
-
     function clear() {
         return {type: CLEAR_CART, payload: "Your cart is cleared."}
     }
@@ -53,7 +52,6 @@ export const increaseItem = (product) => {
         dispatch(increase(product));
         dispatch(success(("Product quantity increased successfully.")))
     }
-
     function increase(product) {
         return {type: INCREASE_CART_ITEM, payload: product}
     }
@@ -64,7 +62,6 @@ export const decreaseItem = (product) => {
         dispatch(decrease(product));
         dispatch(success(("Product quantity decreased successfully.")))
     }
-
     function decrease(product) {
         return {type: DECREASE_CART_ITEM, payload: product}
     }

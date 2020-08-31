@@ -33,7 +33,7 @@ const Header = ({ auth, logout, cartTotalItems }) =>{
                                     <NavDropdown title={ <FaUser size={"1rem"}/> }>
                                         <Link className="dropdown-item" to="/login" onClick={logout}>Logout</Link>
                                         <NavDropdown.Divider />
-                                        <Link className="dropdown-item" to="/profile">Profile</Link>
+                                        <Link className="dropdown-item" to="/account">Account</Link>
                                     </NavDropdown>
                                 </Fragment>
                             }
