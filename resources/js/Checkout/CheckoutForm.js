@@ -159,6 +159,8 @@ const CheckoutForm = ({auth, cart, checkout}) => {
                     <Link to={"/"} className={"btn btn-info mr-1 ml-1"}>Continue
                         Shopping
                     </Link>
+                    <Link to={"/cart"} className={"btn btn-success mr-1 ml-1"}>View Cart
+                    </Link>
                 </Form>
             </div>
         </div>

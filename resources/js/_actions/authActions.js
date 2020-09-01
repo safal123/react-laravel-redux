@@ -2,7 +2,7 @@ import {authService} from "../_services";
 
 import {LOGIN, LOGIN_ERROR, LOGOUT, REGISTER, REGISTER_ERROR} from "./types";
 import {history} from "../_helpers";
-import {success as alertSuccess} from "./alert.action";
+import {success as alertSuccess, error as alertError} from "./alert.action";
 
 export const login = data => {
     return dispatch => {
@@ -55,7 +55,6 @@ export const logout = () => {
     return {
         type: LOGOUT,
     };
-
 }
 
 export const registerUser = data => dispatch => {
