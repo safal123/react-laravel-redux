@@ -12,7 +12,7 @@ const Alert = ({alert, clear}) => {
 
     if (alert.message) {
         return (
-            <AlertMessage className={"alert"} variant={alert.type} onClose={() => clear()} dismissible>
+            <AlertMessage className={"alertMain"} variant={alert.type} onClose={() => clear()} dismissible>
                 {alert.message}
             </AlertMessage>
         );
