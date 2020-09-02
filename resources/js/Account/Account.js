@@ -18,6 +18,14 @@ const Account = ({logout, alertError}) => {
             }
         })
     }, [])
+    if (!orders) {
+        return <div className={"homePageSpinner"} style={{
+            position: "fixed",
+            zIndex: "1000",
+        }}>
+            <Spinner animation="border"/>
+        </div>
+    }
     return (
         <div className={"container mt-2"}>
             <div className={"card"}>
@@ -25,12 +33,6 @@ const Account = ({logout, alertError}) => {
                     You have {orders && orders.length} orders.
                 </div>
                 <div className="card-body">
-                    {!orders ? <div className={"homePageSpinner"} style={{
-                        position: "fixed",
-                        zIndex: "1000",
-                    }}>
-                        <Spinner animation="border"/>
-                    </div> : ""}
                     <div className={"table-responsive-md table-responsive-lg"}>
                         <table className={"table"}>
                             <thead>
