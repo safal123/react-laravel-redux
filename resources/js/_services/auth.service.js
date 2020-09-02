@@ -20,10 +20,8 @@ function logout() {
     return api().post('/logout')
         .then(() => {
             localStorage.removeItem('auth');
-            console.log('Successfully logged out.')
         }).catch(error => {
             localStorage.removeItem('auth');
-            console.log(error.response);
         })
 }
 
