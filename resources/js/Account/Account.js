@@ -10,14 +10,21 @@ import moment from "moment";
 const Account = ({logout, alertError}) => {
     const [orders, setOrders] = useState();
      useEffect(() => {
-         api().get('/orders').then(response => {
-            setOrders(response.data);
-        }).catch(error => {
-            alertError(error.response.statusText);
-            if (error.response.status === 401) {
-                logout();
-            }
-        })
+         const fetchOrders = async () => {
+             try {
+                 await api().get('/orders').then(response => {
+                     setOrders(response.data);
+                 }).catch(error => {
+                     alertError(error.response.statusText);
+                     if (error.response.status === 401) {
+                         logout();
+                     }
+                 })
+             }catch (e) {
+                 console.log(e);
+             }
+         };
+         fetchOrders();
     }, [])
     if (!orders) {
         return <div className={"homePageSpinner"} style={{
