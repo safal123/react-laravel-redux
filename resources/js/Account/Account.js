@@ -5,11 +5,12 @@ import {Spinner} from "react-bootstrap";
 import {logout} from "../_actions/authActions";
 import {connect} from 'react-redux';
 import {error as alertError} from "../_actions/alert.action";
+import moment from "moment";
 
 const Account = ({logout, alertError}) => {
     const [orders, setOrders] = useState();
-    useEffect(() => {
-        api().get('/orders').then(response => {
+     useEffect(() => {
+         api().get('/orders').then(response => {
             setOrders(response.data);
         }).catch(error => {
             alertError(error.response.statusText);
@@ -52,7 +53,11 @@ const Account = ({logout, alertError}) => {
                                     <td>{order.billing_name}</td>
                                     <td>{order.billing_email}</td>
                                     <td>{order.billing_address}</td>
-                                    <td>{Date(order.created_at)}</td>
+                                    <td>
+                                        {moment(order.created_at).fromNow()}
+                                        <br />
+                                        <span className={"text-muted"}>{moment(order.created_at).format("LLL")}</span>
+                                    </td>
                                     <td>${order.billing_total}</td>
                                     <td>Pending</td>
                                     <td>
