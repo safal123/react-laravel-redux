@@ -34,14 +34,14 @@ const CheckoutForm = ({auth, cart, clearCart, info}) => {
                 "phone": data.phone
             };
             token.cart = cart;
-            await api().post('/checkout', token).then(response =>{
-                console.log(response);
-                if(response.status === 200){
+            await api().post('/checkout', token).then(response => {
+                if (response.status === 200) {
                     setProcessing(false);
+                    auth.isLoggedIn ? history.push('/account') : history.push('/');
+                    clearCart();
                     info("Payment successful. Please check your email.")
-                    history.push('/account');
                 }
-            }).catch(error =>{
+            }).catch(error => {
                 console.log(error);
             })
         }
