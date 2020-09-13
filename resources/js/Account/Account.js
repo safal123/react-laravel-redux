@@ -9,22 +9,22 @@ import moment from "moment";
 
 const Account = ({logout, alertError}) => {
     const [orders, setOrders] = useState();
-     useEffect(() => {
-         const fetchOrders = async () => {
-             try {
-                 await api().get('/orders').then(response => {
-                     setOrders(response.data);
-                 }).catch(error => {
-                     alertError(error.response.statusText);
-                     if (error.response.status === 401) {
-                         logout();
-                     }
-                 })
-             }catch (e) {
-                 console.log(e);
-             }
-         };
-         fetchOrders();
+    useEffect(() => {
+        const fetchOrders = async () => {
+            try {
+                await api().get('/orders').then(response => {
+                    setOrders(response.data);
+                }).catch(error => {
+                    alertError(error.response.statusText);
+                    if (error.response.status === 401) {
+                        logout();
+                    }
+                })
+            } catch (e) {
+                console.log(e);
+            }
+        };
+        fetchOrders();
     }, [])
     if (!orders) {
         return <div className={"homePageSpinner"} style={{
@@ -62,7 +62,7 @@ const Account = ({logout, alertError}) => {
                                     <td>{order.billing_address}</td>
                                     <td>
                                         {moment(order.created_at).fromNow()}
-                                        <br />
+                                        <br/>
                                         <span className={"text-muted"}>{moment(order.created_at).format("LLL")}</span>
                                     </td>
                                     <td>${order.billing_total}</td>
@@ -88,7 +88,6 @@ const mapDispatchToProps = dispatch => {
         alertError: message => {
             dispatch(alertError(message));
         }
-
     }
 }
 

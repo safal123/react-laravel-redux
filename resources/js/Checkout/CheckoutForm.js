@@ -3,8 +3,10 @@ import {useForm} from "react-hook-form";
 import {CardElement, useStripe, useElements} from "@stripe/react-stripe-js";
 import {Form, Spinner} from "react-bootstrap";
 import {Link} from "react-router-dom";
+import {history} from "../_helpers";
+import api from "../_helpers/api";
 
-const CheckoutForm = ({auth, cart, checkout}) => {
+const CheckoutForm = ({auth, cart, clearCart, info}) => {
     const {register, handleSubmit, errors} = useForm();
     const stripe = useStripe();
     const elements = useElements();
@@ -32,8 +34,16 @@ const CheckoutForm = ({auth, cart, checkout}) => {
                 "phone": data.phone
             };
             token.cart = cart;
-            setProcessing(false);
-            checkout(token);
+            await api().post('/checkout', token).then(response =>{
+                console.log(response);
+                if(response.status === 200){
+                    setProcessing(false);
+                    info("Payment successful. Please check your email.")
+                    history.push('/account');
+                }
+            }).catch(error =>{
+                console.log(error);
+            })
         }
     }
 

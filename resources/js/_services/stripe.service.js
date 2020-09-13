@@ -6,5 +6,5 @@ export const stripeService = {
 };
 
 async function checkout(token) {
-    return await api().post('/checkout', token).then(history.push('/account'));
+    return await api().post('/checkout', token);
 }

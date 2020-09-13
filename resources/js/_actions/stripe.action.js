@@ -8,15 +8,14 @@ export const checkout = data => {
     return dispatch => {
         stripeService.checkout(data)
             .then(response => {
-                dispatch(clearCart())
-                dispatch(info("Payment successful. Please check your email."))
+                dispatch(clearCart());
+                dispatch(info("Payment successful. Please check your email."));
             })
             .catch(error => {
-                if(error.response.status == 401){
+                if(error.response.status === 401){
                     dispatch(logout());
                     dispatch(alertError("Unauthenticated."));
                 }
-                console.log(error.response.status)
             });
     }
 }
