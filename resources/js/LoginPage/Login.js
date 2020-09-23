@@ -16,7 +16,7 @@ const Login = ({ login, message, socialLogin }) => {
     const onsubmit = (data) =>{
         login(data);
     }
-    
+
     const responseGoogle = (response) => {
         const token =  response.tokenObj.id_token
         const data = { token };
@@ -73,7 +73,7 @@ const Login = ({ login, message, socialLogin }) => {
                                 </Form.Group>
                                 <SubmitButton text={"Login"} variant={"info"}/>
                                 <Link className="ml-2" to="/register">New user?</Link>
-                                <Link className="ml-4" to="/register">Forget password?</Link>
+                                <Link className="ml-4" to="/password/email">Forget password?</Link>
                             </Form>
                             <Row className={""}>
                                 <Col className={"mt-2 d-flex justify-content-center"}>

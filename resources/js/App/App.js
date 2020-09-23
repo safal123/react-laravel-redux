@@ -14,6 +14,8 @@ import Alert from "../_components/Alert/Alert";
 import './App.css';
 import Checkout from "../Checkout/Checkout";
 import {Account} from "../Account";
+import {ForgetPassword} from "../ForgetPassword";
+import {PasswordReset} from "../PasswordReset";
 
 
 function App({alert, clear}) {
@@ -27,9 +29,11 @@ function App({alert, clear}) {
                 <Route path={"/"} exact={true} component={Home}/>
                 <GuestRoute path={"/login"} exact={true} component={Login}/>
                 <GuestRoute path={"/register"} exact={true} component={Register}/>
+                <GuestRoute path={"/password/email"} exact={true} component={ForgetPassword}/>
+                <GuestRoute path={"/reset-password-form/:token?"} exact={true} component={PasswordReset}/>
                 <Route path={"/cart"} exact={true} component={Cart}/>
                 <Route path={"/checkout"} exact={true} component={Checkout}/>
-                <PrivateRoute path={"/account"} exact={true} component={Account} />
+                <PrivateRoute path={"/account"} exact={true} component={Account}/>
                 <Redirect from="*" to="/"/>
             </Switch>
 

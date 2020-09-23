@@ -34,8 +34,7 @@ class OrderPlaced extends Mailable
     public function build()
     {
         return $this->to($this->order->billing_email, $this->order->billing_name)
-            ->bcc('another@anotherc.com')
-            ->subject('Order from Laravel Shoping cart')
+            ->subject('Order from Laravel Shopping cart')
             ->markdown('emails.orders.placed');
     }
 }
