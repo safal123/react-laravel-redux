@@ -44,7 +44,7 @@ class PasswordResetNotification extends Notification
     public function toMail($notifiable)
     {
         $baseUrl = env('APP_URL');
-        $url = $baseUrl . "/reset-password-form/" . $this->token;
+        $url = $baseUrl . "reset-password-form/" . $this->token;
         return (new MailMessage)
             ->subject(Lang::get('Reset Password Notification'))
             ->line(Lang::get('You are receiving this email because we received a password reset request for your account.'))
