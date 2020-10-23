@@ -1,6 +1,6 @@
 import { LOGIN, LOGIN_ERROR, LOGOUT, REGISTER, REGISTER_ERROR } from "../_actions/types";
 
-let auth = JSON.parse(localStorage.getItem('auth'));
+let auth = JSON.parse(localStorage.getItem('auth')) ?? null;
 const initialState = auth ? { isLoggedIn: true, user: auth.user } : {}
 
 export default function (state = initialState, action) {

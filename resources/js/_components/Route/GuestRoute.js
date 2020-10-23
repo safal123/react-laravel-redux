@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 const GuestRoute = ({ component: Component, isLoggedIn, ...rest }) => (
     <Route {...rest} render={props => (
         isLoggedIn
-            ? <Redirect to={{ pathname: '/', state: { from: props.location } }} />
+            ? <Redirect to={{ pathname: '/' }} />
             : <Component {...props} />
     )} />
 )

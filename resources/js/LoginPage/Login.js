@@ -2,25 +2,29 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { connect } from "react-redux";
+import { useLocation } from 'react-router-dom';
 
 import { login, socialLogin} from "../_actions/authActions";
 
 import {Container, Form, Card, Row, Col, Alert, Spinner} from 'react-bootstrap';
 import SubmitButton from "../_components/SubmitButton";
 import GoogleLogin from 'react-google-login';
+import {icons} from "react-icons";
 
 
 const Login = ({ login, message, socialLogin }) => {
     const { register, handleSubmit, errors } = useForm();
+    let location = useLocation();
+    let pathName = location.state && location.state.from.pathname;
 
     const onsubmit = (data) =>{
-        login(data);
+        login(data, pathName);
     }
 
     const responseGoogle = (response) => {
         const token =  response.tokenObj.id_token
         const data = { token };
-        socialLogin(data);
+        socialLogin(data, pathName);
     }
 
     const responseGoogleFailure = response =>{

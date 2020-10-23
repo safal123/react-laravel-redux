@@ -5,6 +5,7 @@ import {Form, Spinner} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import {history} from "../_helpers";
 import api from "../_helpers/api";
+import './Checkout.css';
 
 const CheckoutForm = ({auth, cart, clearCart, info}) => {
     const {register, handleSubmit, errors} = useForm();
@@ -42,7 +43,9 @@ const CheckoutForm = ({auth, cart, clearCart, info}) => {
                     info("Payment successful. Please check your email.")
                 }
             }).catch(error => {
-                console.log(error);
+                console.log(error.response);
+                setError(error.response.data.error);
+                setProcessing(false);
             })
         }
     }
@@ -132,7 +135,7 @@ const CheckoutForm = ({auth, cart, clearCart, info}) => {
                                             fontSize: '16px',
                                             color: '#424770',
                                             '::placeholder': {
-                                                color: '#aab7c4',
+                                                color: '#02401c',
                                             },
                                         },
                                         invalid: {
@@ -148,29 +151,31 @@ const CheckoutForm = ({auth, cart, clearCart, info}) => {
                         </Form.Text>
                         }
                     </Form.Group>
-                    <button className={"btn btn-primary"} disabled={!stripe || processing}>
-                        {processing ?
-                            <Fragment>
-                                <Spinner
-                                    className={"mr-1"}
-                                    as="span"
-                                    animation="border"
-                                    size="sm"
-                                    role="status"
-                                    aria-hidden="true"/>
-                                Please wait...
-                            </Fragment>
-                            :
-                            <Fragment>
-                                Pay now
-                            </Fragment>
-                        }
-                    </button>
-                    <Link to={"/"} className={"btn btn-info mr-1 ml-1"}>Continue
-                        Shopping
-                    </Link>
-                    <Link to={"/cart"} className={"btn btn-success mr-1 ml-1"}>View Cart
-                    </Link>
+                    <div className={"checkoutButton"}>
+                        <button className={"btn btn-primary"} disabled={!stripe || processing}>
+                            {processing ?
+                                <Fragment>
+                                    <Spinner
+                                        className={"mr-1"}
+                                        as="span"
+                                        animation="border"
+                                        size="sm"
+                                        role="status"
+                                        aria-hidden="true"/>
+                                    Please wait...
+                                </Fragment>
+                                :
+                                <Fragment>
+                                    Pay now
+                                </Fragment>
+                            }
+                        </button>
+                        <Link to={"/"} className={"btn btn-info mr-1 ml-1"}>Continue
+                            Shopping
+                        </Link>
+                        <Link to={"/cart"} className={"btn btn-success mr-1 ml-1"}>View Cart
+                        </Link>
+                    </div>
                 </Form>
             </div>
         </div>

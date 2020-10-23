@@ -4,9 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Jobs\SendOrderEmailJob;
-use App\Mail\OrderPlaced;
 use App\Order;
-use Illuminate\Support\Facades\Mail;
+use Cartalyst\Stripe\Exception\CardErrorException;
 use Stripe;
 use Auth;
 use Illuminate\Support\Facades\DB;
@@ -16,9 +15,9 @@ class CheckoutController extends Controller
 {
     public function __construct(Request $request)
     {
-        if ($request->header('Authorization')) {
-            $this->middleware('client.credentials')->only(['checkout']);
-        }
+//        if ($request->header('Authorization')) {
+//            $this->middleware('client.credentials')->only(['checkout']);
+//        }
     }
 
     public function checkout(Request $request)
@@ -27,14 +26,18 @@ class CheckoutController extends Controller
         $id = $request->id;
         $cart = $request->cart;
         $billing_details = $request->billing_details;
-        $card = $request->card;
-        $charge = Stripe::charges()->create([
-            'amount' => $cart['totalPrice'],
-            'currency' => 'AUD',
-            'source' => $id,
-            'description' => 'Order',
-            'receipt_email' => $billing_details['email'],
-        ]);
+//        $card = $request->card;
+        try {
+            $charge = Stripe::charges()->create([
+                'amount' => $cart['totalPrice'],
+                'currency' => 'AUD',
+                'source' => $id,
+                'description' => 'Order',
+                'receipt_email' => $billing_details['email'],
+            ]);
+        } catch (CardErrorException $e){
+            return response()->json(["error" => $e->getMessage()], 500);
+        }
         DB::beginTransaction();
         try {
             $order = Order::create([

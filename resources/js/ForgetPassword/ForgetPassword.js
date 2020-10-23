@@ -6,18 +6,18 @@ import {useForm} from "react-hook-form";
 import api from "../_helpers/api";
 
 const ForgetPassword = () => {
-    const {register, handleSubmit, errors} = useForm();
+    const {register, handleSubmit, errors, reset} = useForm();
     const [message, setMessage] = useState();
     const [success, setSuccess] = useState();
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const onsubmit = (data) => {
+    const onsubmit = (data,e) => {
         setIsSubmitting(true);
         api().post("/password/email", data)
             .then(response => {
-                console.log(response)
                 setSuccess(response.data.message);
                 setIsSubmitting(false);
                 setMessage(null);
+                e.target.reset();
             }).catch(error => {
             setIsSubmitting(false);
             setMessage(error.response.data.errors.email);

@@ -32,7 +32,7 @@ function App({alert, clear}) {
                 <GuestRoute path={"/password/email"} exact={true} component={ForgetPassword}/>
                 <GuestRoute path={"/reset-password-form/:token?"} exact={true} component={PasswordReset}/>
                 <Route path={"/cart"} exact={true} component={Cart}/>
-                <Route path={"/checkout"} exact={true} component={Checkout}/>
+                <PrivateRoute path={"/checkout"} exact={true} component={Checkout}/>
                 <PrivateRoute path={"/account"} exact={true} component={Account}/>
                 <Redirect from="*" to="/"/>
             </Switch>

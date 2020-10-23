@@ -2,6 +2,7 @@ import React from 'react';
 
 import { FaCartArrowDown } from "react-icons/all";
 import { Button, Card } from "react-bootstrap";
+import product_image from '../images/product_image.jpeg';
 
 const ProductCard = ({ product, addToCart }) =>{
     return(
@@ -9,7 +10,7 @@ const ProductCard = ({ product, addToCart }) =>{
             <Card.Img
                 className={"p-2"}
                 variant="top"
-                src="https://picsum.photos/100/100"
+                src={product_image}
                 height={200}
                 width={50}
             />
