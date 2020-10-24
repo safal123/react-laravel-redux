@@ -31,18 +31,23 @@ const CheckOut = ({auth, cart, checkout, clearCart, info}) => {
                         />
                     </Elements>
                 </div>
-                <div className="col-md-4 col-sm-12">
+                <div className="col-md-4 col-sm-12 mt-sm-1">
                     <div className="card">
                         <div className="card-header">
                             Your Order details
                         </div>
                         <div className="card-body">
                             {cart && items.map(item =>
-                                <div key={item.id} className={"cart-items"}>
-                                    {item.name} {item.quantity}*{item.price} = ${item.quantity * item.price}
+                                <div key={item.id} className={"cart-items d-flex"}>
+                                    <div>
+                                        {item.name} {item.quantity}*${item.price}
+                                    </div>
+                                    <div>
+                                        ${item.quantity * item.price}
+                                    </div>
                                 </div>
                             )}
-                            <div className={"cart-total"}>Total Price: ${cart.totalPrice}</div>
+                            <div className={"float-right"}>Total Price: ${cart.totalPrice}</div>
                         </div>
                     </div>
                 </div>

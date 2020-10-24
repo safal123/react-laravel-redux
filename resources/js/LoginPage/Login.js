@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { connect } from "react-redux";
@@ -16,9 +16,12 @@ const Login = ({ login, message, socialLogin }) => {
     const { register, handleSubmit, errors } = useForm();
     let location = useLocation();
     let pathName = location.state && location.state.from.pathname;
+    const [processing, setProcessing] = useState(false);
 
     const onsubmit = (data) =>{
+        setProcessing(true);
         login(data, pathName);
+        setProcessing(false);
     }
 
     const responseGoogle = (response) => {
@@ -75,7 +78,7 @@ const Login = ({ login, message, socialLogin }) => {
                                     </Form.Text>
                                     }
                                 </Form.Group>
-                                <SubmitButton text={"Login"} variant={"info"}/>
+                                <SubmitButton text={"Login"} variant={"info"} disabled={processing}/>
                                 <Link className="ml-2" to="/register">New user?</Link>
                                 <Link className="ml-4" to="/password/email">Forget password?</Link>
                             </Form>

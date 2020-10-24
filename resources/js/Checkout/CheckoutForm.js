@@ -100,13 +100,10 @@ const CheckoutForm = ({auth, cart, clearCart, info}) => {
                             name={"phone"}
                             className={errors.phone ? "is-invalid" : ""}
                             aria-invalid={errors.phone ? "true" : "false"}
-                            ref={register({required: "Phone number is required."})}
+                            ref={register({ pattern: /\d+/, required: "Phone number is required."})}
                             placeholder={"Enter your phone number."}/>
-                        {errors.phone &&
-                        <Form.Text className={"text-danger"}>
-                            {errors.phone.message}
-                        </Form.Text>
-                        }
+                        {errors.phone && <Form.Text className={"text-danger"}>{errors.phone.message}</Form.Text>}
+                        {errors.phone && errors.phone.type === "pattern" && <Form.Text className={"form-text text-danger"}>Please enter valid phone number.</Form.Text>}
                     </Form.Group>
 
                     <Form.Group>
@@ -151,25 +148,27 @@ const CheckoutForm = ({auth, cart, clearCart, info}) => {
                         </Form.Text>
                         }
                     </Form.Group>
-                    <div className={"checkoutButton"}>
-                        <button className={"btn btn-primary"} disabled={!stripe || processing}>
-                            {processing ?
-                                <Fragment>
-                                    <Spinner
-                                        className={"mr-1"}
-                                        as="span"
-                                        animation="border"
-                                        size="sm"
-                                        role="status"
-                                        aria-hidden="true"/>
-                                    Please wait...
-                                </Fragment>
-                                :
-                                <Fragment>
-                                    Pay now
-                                </Fragment>
-                            }
-                        </button>
+                    <div className={"d-flex justify-content-between"}>
+                        <div className={"leftButtons"}>
+                            <button className={"btn btn-primary"} disabled={!stripe || processing}>
+                                {processing ?
+                                    <Fragment>
+                                        <Spinner
+                                            className={"mr-1"}
+                                            as="span"
+                                            animation="border"
+                                            size="sm"
+                                            role="status"
+                                            aria-hidden="true"/>
+                                        Please wait...
+                                    </Fragment>
+                                    :
+                                    <Fragment>
+                                        Pay now
+                                    </Fragment>
+                                }
+                            </button>
+                        </div>
                         <Link to={"/"} className={"btn btn-info mr-1 ml-1"}>Continue
                             Shopping
                         </Link>

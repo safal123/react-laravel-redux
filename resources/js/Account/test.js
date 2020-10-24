@@ -34,9 +34,6 @@ const Account = ({logout, alertError}) => {
             <Spinner animation="border"/>
         </div>
     }
-    if(orders.length === 0){
-        return <div className={"container"}>You don't have any orders yet.</div>
-    }
     return (
         <div className={"container mt-2"}>
             <div className={"card"}>
@@ -48,9 +45,9 @@ const Account = ({logout, alertError}) => {
                         {orders && orders.map(order => (
                             <div key={order.id} className="card border-dark mb-3">
                                 <div className="card-header">
-                                    Order By: {order.billing_name} <span className={"badge badge-info"}>pending</span>
+                                    Order By: {order.billing_name}
                                     <div className={"float-right"}>
-                                        <h4><span className={"text-light badge badge-success"}>{moment(order.created_at).format("LLL")}</span></h4>
+                                        <span className={"text-muted"}>{moment(order.created_at).format("LLL")}</span>
                                     </div>
                                 </div>
                                 <div className="card-body ">
@@ -62,7 +59,6 @@ const Account = ({logout, alertError}) => {
                                         </div>
                                         <div className={""}>
                                             <h5>Billing Details</h5>
-                                            <span>Order Refrence Number: #233233ADJ769</span><br/>
                                             <span>Billing Address: { order.billing_address}</span><br/>
                                             <span>Billing Phone: { order.billing_phone}</span>
                                         </div>
