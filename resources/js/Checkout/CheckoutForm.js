@@ -148,9 +148,14 @@ const CheckoutForm = ({auth, cart, clearCart, info}) => {
                         </Form.Text>
                         }
                     </Form.Group>
-                    <div className={"d-flex justify-content-between"}>
-                        <div className={"leftButtons"}>
-                            <button className={"btn btn-primary"} disabled={!stripe || processing}>
+                    <div className={"d-flex flex-lg-row flex-column"}>
+                        <Link to={"/"} className={"btn btn-info"}>Continue
+                            Shopping
+                        </Link>
+                        <Link to={"/cart"} className={"btn btn-success ml-lg-1 mt-1 mt-lg-0"}>View Cart
+                        </Link>
+                        <div className={"ml-lg-auto mt-1 mt-lg-0"}>
+                            <button className={"btn btn-primary btn-block"} disabled={!stripe || processing}>
                                 {processing ?
                                     <Fragment>
                                         <Spinner
@@ -169,11 +174,7 @@ const CheckoutForm = ({auth, cart, clearCart, info}) => {
                                 }
                             </button>
                         </div>
-                        <Link to={"/"} className={"btn btn-info mr-1 ml-1"}>Continue
-                            Shopping
-                        </Link>
-                        <Link to={"/cart"} className={"btn btn-success mr-1 ml-1"}>View Cart
-                        </Link>
+
                     </div>
                 </Form>
             </div>
