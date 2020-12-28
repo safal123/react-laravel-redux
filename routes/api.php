@@ -28,9 +28,7 @@ Route::post('/checkout', 'Api\CheckoutController@checkout');
 
 Route::middleware(['auth:api'])->group( function (){
     Route::post('logout', 'Api\AuthController@logout');
-    Route::get('user', function (Request $request){
-        return $request->user();
-    });
+    Route::get('user', 'Api\UserController@index');
     Route::get('orders', 'Api\OrderController@index');
 });
 

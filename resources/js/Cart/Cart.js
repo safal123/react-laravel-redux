@@ -60,20 +60,19 @@ const Cart = ({cart, clearCart, increaseItem, decreaseItem, removeFromCart}) => 
                             :
                             <h1>Your cart is empty.</h1>
                         }
-                        <div className={"d-flex justify-content-between align-items-center"}>
-                            <Link to={"/"} className={"btn btn-info mr-1"}>Continue
+                        <div className={"d-flex align-items-center"}>
+                            <Link to={"/"} className={"btn btn-info"}>Continue
                                 Shopping
                             </Link>
+                            <Button onClick={() => clearCart()} className={"btn btn-danger"}>
+                                <div className={"d-flex align-items-center ml-2"}>
+                                    <AiFillDelete/>
+                                    <span>Clear Cart</span>
+                                </div>
+                            </Button>
                             {cart.items.length > 0 &&
-                            <div className={"d-flex"}>
-                                <Button onClick={() => clearCart()} className={"btn btn-danger"}>
-                                    <div className={"d-flex align-items-center ml-2"}>
-                                        <AiFillDelete/>
-                                        <span>Clear Cart</span>
-                                    </div>
-                                </Button>
-                                <Link to={"/checkout"} className={"ml-1 btn btn-primary"}>Checkout</Link>
-                            </div>
+                            <Link to={"/checkout"}
+                                  className={"ml-1 btn btn-primary ml-lg-auto"}>Checkout</Link>
                             }
                         </div>
                     </Card.Body>

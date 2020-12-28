@@ -18,9 +18,9 @@ const CheckOut = ({auth, cart, checkout, clearCart, info}) => {
     }
 
     return (
-        <div className={"container mt-2"}>
-            <div className={"row"}>
-                <div className={"col-md-8 col-sm-12"}>
+        <div className={"p-2"}>
+            <div className={"container d-flex flex-column flex-column-reverse flex-lg-row"}>
+                <div className={"col-lg-8"}>
                     <Elements stripe={stripePromise}>
                         <CheckoutForm
                             auth={auth}
@@ -31,7 +31,7 @@ const CheckOut = ({auth, cart, checkout, clearCart, info}) => {
                         />
                     </Elements>
                 </div>
-                <div className="col-md-4 col-sm-12 mt-sm-1">
+                <div className={"col-lg-4 mb-2 mb-lg-0"}>
                     <div className="card">
                         <div className="card-header">
                             Your Order details
