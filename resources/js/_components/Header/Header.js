@@ -1,54 +1,55 @@
 import React, {Fragment} from 'react';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
+import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
 
-import { logout } from "../../_actions/authActions";
-import { Navbar, Nav, NavDropdown } from "react-bootstrap";
-import { FaShoppingCart, FaUser } from "react-icons/all";
+import {logout} from "../../_actions/authActions";
+import {Navbar, Nav, NavDropdown} from "react-bootstrap";
+import {FaShoppingCart, FaUser} from "react-icons/all";
+import Admin from "./Admin";
 
-const Header = ({ auth, logout, cartTotalItems }) =>{
-    return(
+const Header = ({auth, logout, cartTotalItems}) => {
+    return (
         <Fragment>
+            {auth.user && auth.user.id === 1 ?
+                <Admin/>
+                : ''
+            }
             <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
                 <div className="container">
-                    <Link className="navbar-brand" to="/">Shop Online</Link>
-                    <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                    <Link className="navbar-brand d-none d-xl-block" to="/">Shop Online</Link>
+                    <Navbar.Toggle aria-controls="responsive-navbar-nav" className={"ml-auto"}/>
                     <Navbar.Collapse id="responsive-navbar-nav">
-                        <Nav className="mr-auto">
-                            {/*<Nav.Link href="#products">Products</Nav.Link>*/}
-                            {/*<Nav.Link href="#categories">Categories</Nav.Link>*/}
-                        </Nav>
-                        <Nav>
+                        <Nav className={"ml-auto"}>
                             <Link className="nav-link" to="/cart">
                                 <FaShoppingCart size={"1rem"}/>
-                                <span className="badge badge-danger ml-1">{ cartTotalItems  }</span>
+                                <span className="badge badge-danger ml-1">{cartTotalItems}</span>
                             </Link>
-                            { !auth.isLoggedIn ?
-                                <Fragment>
+                            {!auth.isLoggedIn ?
+                                <>
                                     <Link className="nav-link" to="/login">Login</Link>
                                     <Link className="nav-link" to="/register">Register</Link>
-                                </Fragment>
+                                </>
                                 :
-                                <Fragment>
-                                    <NavDropdown title={ <FaUser size={"1rem"}/> }>
+                                <>
+                                    <NavDropdown title={<FaUser size={"1rem"}/>}>
                                         <Link className="dropdown-item" to="/login" onClick={logout}>Logout</Link>
-                                        <NavDropdown.Divider />
+                                        <NavDropdown.Divider/>
                                         <Link className="dropdown-item" to="/account">Account</Link>
                                     </NavDropdown>
-                                </Fragment>
+                                </>
                             }
                         </Nav>
                     </Navbar.Collapse>
                 </div>
             </Navbar>
+
         </Fragment>
     );
 }
 
-const mapStateToProps = state =>({
-    // isLoggedIn: state.auth.isLoggedIn,
+const mapStateToProps = state => ({
     auth: state.auth,
     cartTotalItems: state.cart.totalItems
 })
 
-export default connect(mapStateToProps, { logout })(Header);
+export default connect(mapStateToProps, {logout})(Header);

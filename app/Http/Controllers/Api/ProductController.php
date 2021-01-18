@@ -4,12 +4,14 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Product;
+use Illuminate\Http\Request;
+
 
 class ProductController extends Controller
 {
     public function index()
     {
-        return response()->json(['products' => Product::all()]);
+        return response()->json(['products' => Product::orderBy('created_at', 'desc')->get()]);
     }
 
     public function get($id)
@@ -21,5 +23,16 @@ class ProductController extends Controller
         }
 
         return response()->json(['product' => $product], 200);
+    }
+
+    public function store(Request $request)
+    {
+        $data = $request->validate([
+            'name' => 'required',
+            'price' => 'required',
+            'description' => 'required'
+        ]);
+        Product::create($data);
+        return 200;
     }
 }

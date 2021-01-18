@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Laravel\Passport\Exceptions\InvalidAuthTokenException;
 
 class UserController extends Controller
 {

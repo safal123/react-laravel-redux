@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('login', 'Api\AuthController@login');
+Route::post('login', 'Api\AuthController@login')->name('login');
 Route::post('register', 'Api\AuthController@register');
 Route::post('login/google', 'Api\SocialAuthController@auth');
 
@@ -30,5 +30,6 @@ Route::middleware(['auth:api'])->group( function (){
     Route::post('logout', 'Api\AuthController@logout');
     Route::get('user', 'Api\UserController@index');
     Route::get('orders', 'Api\OrderController@index');
+    Route::post('products', 'Api\ProductController@store');
 });
 

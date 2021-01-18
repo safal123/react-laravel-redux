@@ -2,6 +2,11 @@ body {
     margin: 0;
     padding: 0;
 }
+.row{
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
 .btn {
     border-radius: 0px !important;
 }

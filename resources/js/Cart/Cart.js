@@ -21,6 +21,7 @@ const Cart = ({cart, clearCart, increaseItem, decreaseItem, removeFromCart}) => 
                                 <thead>
                                 <tr>
                                     <th>#</th>
+                                    <th>Image</th>
                                     <th>Product Name</th>
                                     <th>Price</th>
                                     <th>Quantity</th>
@@ -32,6 +33,7 @@ const Cart = ({cart, clearCart, increaseItem, decreaseItem, removeFromCart}) => 
                                 {cart.items && cart.items.map(item => (
                                     <tr key={item.id}>
                                         <td>{i++}</td>
+                                        <td><img src="" alt=""/></td>
                                         <td>{item.name}</td>
                                         <td>${item.price}.00</td>
                                         <td>
@@ -60,19 +62,22 @@ const Cart = ({cart, clearCart, increaseItem, decreaseItem, removeFromCart}) => 
                             :
                             <h1>Your cart is empty.</h1>
                         }
-                        <div className={"d-flex align-items-center"}>
+                        <div className={"d-flex align-items-center justify-content-between"}>
                             <Link to={"/"} className={"btn btn-info"}>Continue
                                 Shopping
                             </Link>
-                            <Button onClick={() => clearCart()} className={"btn btn-danger"}>
-                                <div className={"d-flex align-items-center ml-2"}>
-                                    <AiFillDelete/>
-                                    <span>Clear Cart</span>
-                                </div>
-                            </Button>
+
                             {cart.items.length > 0 &&
-                            <Link to={"/checkout"}
-                                  className={"ml-1 btn btn-primary ml-lg-auto"}>Checkout</Link>
+                                <div>
+                                    <Button onClick={() => clearCart()} className={"btn btn-danger mr-2"}>
+                                        <div className={"d-flex align-items-center justify-content-between"}>
+                                            <AiFillDelete className={"mr-1"}/>
+                                            <span>Clear Cart</span>
+                                        </div>
+                                    </Button>
+                                    <Link to={"/checkout"}
+                                          className={"ml-1 btn btn-primary ml-lg-auto"}>Checkout</Link>
+                                </div>
                             }
                         </div>
                     </Card.Body>

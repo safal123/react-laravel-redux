@@ -6,6 +6,7 @@ import {Link} from "react-router-dom";
 import {history} from "../_helpers";
 import api from "../_helpers/api";
 import './Checkout.css';
+import SmallSpinner from "../_components/SmallSpinner";
 
 const CheckoutForm = ({auth, cart, clearCart, info}) => {
     const {register, handleSubmit, errors} = useForm();
@@ -157,16 +158,7 @@ const CheckoutForm = ({auth, cart, clearCart, info}) => {
                         <div className={"ml-lg-auto mt-1 mt-lg-0"}>
                             <button className={"btn btn-primary btn-block"} disabled={!stripe || processing}>
                                 {processing ?
-                                    <Fragment>
-                                        <Spinner
-                                            className={"mr-1"}
-                                            as="span"
-                                            animation="border"
-                                            size="sm"
-                                            role="status"
-                                            aria-hidden="true"/>
-                                        Please wait...
-                                    </Fragment>
+                                    <SmallSpinner text={'Please wait..'} />
                                     :
                                     <Fragment>
                                         Pay now
