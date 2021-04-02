@@ -1,24 +1,39 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {useForm} from "react-hook-form";
+import { connect } from 'react-redux';
 import api from "../_helpers/api";
-import { history } from "../_helpers";
+import SmallSpinner from "../_components/SmallSpinner";
+import {history} from "../_helpers";
+import {logout} from "../_actions/authActions";
+import {Link} from "react-router-dom";
+import {success} from "../_actions/alert.action";
 
-const AddNewProduct = () => {
+const AddNewProduct = ({logout, success}) => {
     const {register, handleSubmit, errors} = useForm();
+    const [isLoading, setIsLoading] = useState(false);
 
     const onsubmit = data => {
-        console.log(data);
-        api().post('/products', data).then(res =>{
-            history.push('/admin');
-        }).catch(error =>{
-            alert('Something went wrong.')
-        })
+        setIsLoading(true);
+        api().post('/products', data)
+            .then(res => {
+                setIsLoading(false);
+                success("Product added successfully.");
+                history.push('/admin');
+            })
+            .catch(error => {
+                console.log(error.response);
+                if(error.response.status === 401){
+                    alert(error.response.statusText);
+                }
+                logout();
+            })
     }
     return (
         <div className={'container mt-2'}>
             <div className={'card'}>
-                <div className={'card-header'}>
+                <div className={'card-header d-flex justify-content-between'}>
                     Add new product
+                    <Link to={"/admin"} className={'bg-primary text-white py-1 px-2 text-sm'}>View All Products</Link>
                 </div>
                 <div className={'card-body'}>
                     <form onSubmit={handleSubmit(onsubmit)}>
@@ -67,7 +82,12 @@ const AddNewProduct = () => {
                                 </span>
                             }
                         </div>
-                        <button type={'submit'} className={'btn btn-primary'}>Create new product</button>
+                        <button type={'submit'} className={'btn btn-primary'} disabled={isLoading}>
+                            {isLoading ? <SmallSpinner text={'Please wait..'}/> :
+                                'Create new product'
+                            }
+                        </button>
+                        <button className={'btn btn-info ml-2'}>Cancel</button>
                     </form>
                 </div>
             </div>
@@ -75,4 +95,4 @@ const AddNewProduct = () => {
     )
 }
 
-export default AddNewProduct;
+export default connect(null, {logout, success})(AddNewProduct);

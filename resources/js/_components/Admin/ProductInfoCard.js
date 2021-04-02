@@ -16,9 +16,8 @@ const ProductInfoCard = ({products}) => {
                 <Card.Text>
                     {products ?
                         <Fragment>
-                            <h5>
-                                Total no of products: {products.length}
-                            </h5>
+                            Total no of products: {products.length}
+                            <br/>
                             <Link to={'/'} className={'text-white'}>Go to homepage</Link>
                         </Fragment>
                         :

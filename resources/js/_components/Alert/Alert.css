@@ -5,7 +5,7 @@
     z-index: 1000;
     margin-bottom: 0px !important;
     padding: 0px;
-    color: white;
+    color: white !important;
     height: 56px;
     border-radius: 0px !important;
 }

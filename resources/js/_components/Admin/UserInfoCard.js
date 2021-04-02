@@ -3,24 +3,24 @@ import {Card} from "react-bootstrap";
 import SmallSpinner from "../SmallSpinner";
 import {Link} from "react-router-dom";
 
-const OrderInfoCard = ({orders}) => {
+const UserInfoCard = ({users}) => {
     return (
         <Card
-            bg={'success'}
+            bg={'info'}
             text={'white'}
             style={{width: '18rem'}}
             className="mb-2"
         >
-            <Card.Header>Orders</Card.Header>
+            <Card.Header>Users</Card.Header>
             <Card.Body>
                 <Card.Text>
-                    {orders ?
+                    {users ?
                         <Fragment>
-                            Total no of orders: {orders} <br/>
-                            <Link to={'/'} className={'text-white'}>View all orders</Link>
+                            Total no of users: {users}
+                            <Link to={'/'} className={'text-white'}>Go to homepage</Link>
                         </Fragment>
                         :
-                        <SmallSpinner text={"Please wait fetching all orders...."}/>
+                        <SmallSpinner text={"Please wait fetching all products...."}/>
                     }
                 </Card.Text>
             </Card.Body>
@@ -28,4 +28,4 @@ const OrderInfoCard = ({orders}) => {
     );
 }
 
-export default OrderInfoCard;
+export default UserInfoCard;

@@ -19,15 +19,24 @@ const Admin = () => {
                 </div>
                 <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
                     <div className="bg-light border-right" id="sidebar-wrapper">
-                        <div className="sidebar-heading bg-info d-flex justify-content-between align-items-center" onClick={showSidebar}>
-                            <GrClose/> CLOSE
+                        <div className="sidebar-heading bg-info d-flex justify-content-between align-items-center"
+                             onClick={showSidebar}>
+                            <GrClose/> <span className={'text-white'}>CLOSE</span>
                         </div>
-                        <div className="list-group list-group-flush">
-                            <Link to="/admin"
-                                  className="list-group-item list-group-item-action bg-light">Dashboard</Link>
-                            <Link to="/products/new" className="list-group-item list-group-item-action bg-light">Add new
-                                product</Link>
-                        </div>
+                        <ul className="list-group list-group-flush" onClick={showSidebar}>
+                            <Link to="/admin" className="list-group-item list-group-item-action bg-light">
+                                Dashboard
+                            </Link>
+                            <Link to="/products/new" className="list-group-item list-group-item-action bg-light">
+                                Products
+                            </Link>
+                            <Link to="/orders" className="list-group-item list-group-item-action bg-light">
+                                Orders
+                            </Link>
+                            <Link to="/users" className="list-group-item list-group-item-action bg-light">
+                                Users
+                            </Link>
+                        </ul>
                     </div>
                 </nav>
             </IconContext.Provider>

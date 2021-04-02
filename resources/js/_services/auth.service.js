@@ -1,5 +1,4 @@
 import api from "../_helpers/api";
-import {history} from "../_helpers";
 
 export const authService = {
     login,
@@ -17,12 +16,14 @@ function login(data) {
 }
 
 function logout() {
-    return api().post('/logout')
-        .then(() => {
-            localStorage.removeItem('auth');
-        }).catch(error => {
-            localStorage.removeItem('auth');
-        })
+    localStorage.removeItem('auth');
+    // return api().post('/logout')
+    //     .then(() => {
+    //         localStorage.removeItem('auth');
+    //     }).catch(error => {
+    //         console.log(error.response);
+    //         localStorage.removeItem('auth');
+    //     })
 }
 
 function register(data) {

@@ -17,11 +17,9 @@ class ProductController extends Controller
     public function get($id)
     {
         $product = Product::find($id);
-
         if(!$product){
             return response()->json(['message' => "Product not found."], 404);
         }
-
         return response()->json(['product' => $product], 200);
     }
 
@@ -33,6 +31,22 @@ class ProductController extends Controller
             'description' => 'required'
         ]);
         Product::create($data);
-        return 200;
+        return response(200);
+    }
+
+    public function delete($id)
+    {
+        $product = Product::find($id);
+        if($product) {
+            $product->delete();
+            return response()->json([
+                'message' => 'Product deleted successfully.'
+            ], 200);
+        } else {
+            return response()->json([
+                'message' => 'Product not found.'
+            ], 404);
+        }
+
     }
 }

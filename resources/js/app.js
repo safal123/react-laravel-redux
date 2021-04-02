@@ -13,12 +13,10 @@ const { store, persist } = configureStore();
 
 if (document.getElementById('app')) {
     ReactDOM.render(
-        <Suspense fallback={'<h1>Loading...</h1>'}>
             <Provider store={store}>
                 <PersistGate loading={null} persistor={ persist }>
                     <App />
                 </PersistGate>
-            </Provider>
-        </Suspense>,
+            </Provider>,
         document.getElementById('app'));
 }

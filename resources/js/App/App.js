@@ -19,6 +19,7 @@ import {PasswordReset} from "../PasswordReset";
 import Dashboard from "../Admin/Dashboard";
 import AdminRoute from "../_components/Route/AdminRoute";
 import AddNewProduct from "../Products/AddNewProduct";
+import ErrorPage from "../Error/ErrorPage";
 
 
 function App({alert, clear}) {
@@ -35,6 +36,7 @@ function App({alert, clear}) {
                 <GuestRoute path={"/password/email"} exact={true} component={ForgetPassword}/>
                 <GuestRoute path={"/reset-password-form/:token?"} exact={true} component={PasswordReset}/>
                 <Route path={"/cart"} exact={true} component={Cart}/>
+                <Route path={"/response-error"} exact={true} component={ErrorPage}/>
                 <PrivateRoute path={"/checkout"} exact={true} component={Checkout}/>
                 <PrivateRoute path={"/account"} exact={true} component={Account}/>
                 <AdminRoute path={"/admin"} exact={true} component={Dashboard}/>

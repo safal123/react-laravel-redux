@@ -30,6 +30,7 @@ Route::middleware(['auth:api'])->group( function (){
     Route::post('logout', 'Api\AuthController@logout');
     Route::get('user', 'Api\UserController@index');
     Route::get('orders', 'Api\OrderController@index');
-    Route::post('products', 'Api\ProductController@store');
+    Route::post('products', 'Api\ProductController@store')->middleware('admin:api');
+    Route::delete('products/{id}', 'Api\ProductController@delete')->middleware('admin:api');
 });
 

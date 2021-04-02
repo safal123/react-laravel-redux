@@ -16,9 +16,9 @@ const Account = ({logout, alertError}) => {
                     setOrders(response.data);
                 }).catch(error => {
                     alertError(error.response.statusText);
-                    if (error.response.status === 401) {
-                        logout();
-                    }
+                    // if (error.response.status === 401) {
+                    //     logout();
+                    // }
                 })
             } catch (e) {
                 console.log(e);

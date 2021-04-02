@@ -14,5 +14,3 @@ let api = () => {
     return baseApi;
 }
 export default api;
-
-

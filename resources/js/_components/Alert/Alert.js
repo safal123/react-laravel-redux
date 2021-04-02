@@ -6,7 +6,7 @@ const Alert = ({alert, clear}) => {
     useEffect(() => {
         const timer = setTimeout(() => {
             clear();
-        }, 1000);
+        }, 5000);
         return () => clearTimeout(timer);
     }, []);
 
