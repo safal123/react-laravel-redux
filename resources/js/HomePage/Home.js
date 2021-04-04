@@ -18,7 +18,7 @@ const Home = ({allProducts, products, addToCart}) => {
     }
     return (
         <Container className={"mt-0"}>
-            <Row className="justify-content-md-center">
+            <Row className="">
                 {products &&
                 products.map(product => (
                     <Col md={4} lg={4} xs={12} className="p-1" key={product.id}>
@@ -26,6 +26,9 @@ const Home = ({allProducts, products, addToCart}) => {
                     </Col>
                 ))
                 }
+                <div className={'bg-info w-100 px-2 mx-1'}>
+                    <h1>Latest Products</h1>
+                </div>
             </Row>
         </Container>
     );

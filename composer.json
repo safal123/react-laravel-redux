@@ -9,6 +9,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.2.5",
+        "cartalyst/stripe-laravel": "^12.0",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^2.0",
         "google/apiclient": "^2.6",
@@ -18,7 +19,7 @@
         "laravel/socialite": "^4.4",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.1",
-        "cartalyst/stripe-laravel": "^12.0"
+        "league/flysystem-aws-s3-v3": "^1.0"
     },
     "require-dev": {
         "facade/ignition": "^2.0",

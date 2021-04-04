@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useForm} from "react-hook-form";
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import api from "../_helpers/api";
 import SmallSpinner from "../_components/SmallSpinner";
 import {history} from "../_helpers";
@@ -10,11 +10,25 @@ import {success} from "../_actions/alert.action";
 
 const AddNewProduct = ({logout, success}) => {
     const {register, handleSubmit, errors} = useForm();
+    const [image, setImage] = useState();
     const [isLoading, setIsLoading] = useState(false);
+    const fileInput = React.createRef();
+
+    const changeHandler = (event) => {
+        setImage(event.target.files[0]);
+    };
 
     const onsubmit = data => {
         setIsLoading(true);
-        api().post('/products', data)
+        const fd = new FormData();
+        for (var key in data) {
+            fd.append(key, data[key]);
+        }
+        fd.append(
+            "image",
+            image
+        );
+        api().post('/products', fd)
             .then(res => {
                 setIsLoading(false);
                 success("Product added successfully.");
@@ -22,10 +36,10 @@ const AddNewProduct = ({logout, success}) => {
             })
             .catch(error => {
                 console.log(error.response);
-                if(error.response.status === 401){
+                if (error.response.status === 401) {
                     alert(error.response.statusText);
+                    logout();
                 }
-                logout();
             })
     }
     return (
@@ -42,7 +56,6 @@ const AddNewProduct = ({logout, success}) => {
                             <input
                                 type="text"
                                 name={'name'}
-                                required
                                 ref={register({required: "Name field is required."})}
                                 placeholder={'Iphone 12 Pro Max'}
                                 className={'form-control'}/>
@@ -56,9 +69,9 @@ const AddNewProduct = ({logout, success}) => {
                             <label htmlFor="price">Product price</label>
                             <input
                                 name={'price'}
-                                ref={register({required: "Cool phone."})}
+                                ref={register({required: "Price field is required."})}
                                 type={'number'}
-                                required
+                                // required
                                 placeholder={'$1,000,000.00'}
                                 className={'form-control'}/>
                             {errors.price &&
@@ -72,7 +85,7 @@ const AddNewProduct = ({logout, success}) => {
                             <textarea
                                 name={'description'}
                                 className={'form-control'}
-                                required
+                                // required/
                                 ref={register({required: "Description field is required."})}
                                 placeholder={'Product description'}>
                             </textarea>
@@ -81,6 +94,15 @@ const AddNewProduct = ({logout, success}) => {
                                     {errors.description.message}
                                 </span>
                             }
+                        </div>
+                        <div className={'form-group'}>
+                            {/*<label htmlFor="image">Product Image</label>*/}
+                            <input
+                                type='file'
+                                name={'product_image'}
+                                ref={fileInput}
+                                onChange={changeHandler}
+                            />
                         </div>
                         <button type={'submit'} className={'btn btn-primary'} disabled={isLoading}>
                             {isLoading ? <SmallSpinner text={'Please wait..'}/> :

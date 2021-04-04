@@ -11,33 +11,47 @@ const ProductTable = ({products, deleteProduct}) => {
     }
     return (
         <table className="table table-hover">
-            <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Product Name</th>
-                <th scope="col">Price</th>
-                <th scope="col">Image</th>
-                <th scope={"col"}>Status</th>
-                <th scope={"col"}>Action</th>
-            </tr>
-            {products.length>0 ? products.map((product, index) => <tr key={index}>
+            <thead>
+                <tr>
+                    <th><input type="checkbox"/></th>
+                    <th>ID</th>
+                    <th>Product Name</th>
+                    <th>Price</th>
+                    <th>Image</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+            {products.length > 0 ? products.map((product, index) => <tr key={index}>
+                <td><input type="checkbox"/></td>
                 <td>{product.id}</td>
                 <td>{product.name}</td>
                 <td>${product.price}.00</td>
-                <td>{product.image}</td>
                 <td>
-                    <button className={'btn btn-sm btn-info'}>Inactive</button>
+                    <img
+                        src={ product.image_url}
+                        alt={product.name}
+                        className={'img-thumbnail'}
+                        height={'100'}
+                        width={'100'}
+                    />
+                </td>
+                <td>
+                    <a className={'px-1 py-1 text-white text-muted'}>Inactive</a>
                 </td>
                 <td>
                     <ModalConfirm deleteProduct={deleteProduct} id={product.id}/>
                     <button className={"btn btn-sm btn-primary"}>Edit</button>
                 </td>
             </tr>) : <tr>
-                <td colSpan={6}>
+                <td colSpan={7}>
                     <div className={'py-1 text-center text-info text-sm border-bottom'}>
                         Products not available.
                     </div>
                 </td>
             </tr>}
+            </tbody>
         </table>
     );
 }

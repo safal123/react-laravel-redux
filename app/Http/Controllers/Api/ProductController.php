@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 
 class ProductController extends Controller
@@ -25,13 +26,27 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        $data = $request->validate([
+         $this->validate($request, [
             'name' => 'required',
             'price' => 'required',
-            'description' => 'required'
+            'description' => 'required',
+            'image' => 'image'
         ]);
-        Product::create($data);
-        return response(200);
+        $product = new Product();
+        if($request->hasFile('image')){
+            $path = $request->file('image')->store('products-images', 's3');
+            Storage::disk('s3')->setVisibility($path, 'public');
+        }
+
+        $product->name = $request->name;
+        $product->price = $request->price;
+        $product->description = $request->description;
+        $product->image = basename($path);
+        $product->image_url = Storage::disk('s3')->url($path);
+
+        $product->save();
+
+        return response()->json(['product' => $product], 200);
     }
 
     public function delete($id)

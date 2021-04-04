@@ -33,7 +33,15 @@ const Cart = ({cart, clearCart, increaseItem, decreaseItem, removeFromCart}) => 
                                 {cart.items && cart.items.map(item => (
                                     <tr key={item.id}>
                                         <td>{i++}</td>
-                                        <td><img src="" alt=""/></td>
+                                        <td>
+                                            <img
+                                                src={ item.image_url}
+                                                alt={item.name}
+                                                className={'img-thumbnail pointer'}
+                                                height={'100'}
+                                                width={'100'}
+                                            />
+                                        </td>
                                         <td>{item.name}</td>
                                         <td>${item.price}.00</td>
                                         <td>

@@ -13,6 +13,7 @@ import {info} from "../_actions/alert.action";
 import {Spinner} from "react-bootstrap";
 
 const Dashboard = ({products, allProducts, info}) => {
+    const [search, setSearch] = useState('');
     useEffect(() => {
         allProducts();
     }, []);
@@ -24,6 +25,15 @@ const Dashboard = ({products, allProducts, info}) => {
         }).catch(error => {
             console.log(error.response);
         })
+    }
+
+    function filterProducts(data) {
+        return data.filter(
+            (row) =>
+                row.name.toLowerCase().indexOf(search.toLowerCase()) > -1 ||
+                row.id.toString().toLowerCase().indexOf(search.toLowerCase()) > -1 ||
+                row.price.toLowerCase().indexOf(search.toLowerCase()) > -1
+        );
     }
 
     return <Fragment>
@@ -39,17 +49,22 @@ const Dashboard = ({products, allProducts, info}) => {
                 <UserInfoCard users={10}/>
             </div>
             <div className={"card"}>
-                <div className={"card-header d-flex justify-content-between"}>
-                    All Products
-                    <form action="">
-                        <input type="text" placeholder={'Search products'} className={'px-2 rounded-0 mw-100'}/>
-                    </form>
+                <div className={"card-header d-flex justify-content-between align-items-center"}>
+                    <div className={'mw-100'}>
+                        <form action="">
+                            <input
+                                onChange={(e) => setSearch(e.target.value)}
+                                type="text"
+                                placeholder={'Search products'}
+                                className={'form-control px-2 rounded-0'}/>
+                        </form>
+                    </div>
                     <Link to={"/products/new"}
-                          className={'bg-primary text-white py-1 px-2 text-sm text-decoration-none shadow'}>
+                          className={'bg-primary text-white p-1 text-sm text-decoration-none shadow'}>
                         Add New Product</Link>
                 </div>
                 <div className={"card-body"}>
-                    { products ? <ProductTable products={products} deleteProduct={deleteProduct}/> :
+                    { products ? <ProductTable products={filterProducts(products)} deleteProduct={deleteProduct}/> :
                         <div className={'text-center text-primary'}>
                             <Spinner animation="border" />
                         </div>

@@ -4,3 +4,13 @@
     left: 50%;
     margin-top: -50px;
 }
+
+.pointer {
+    cursor: pointer;
+}
+
+.fit-image{
+    width: 100%;
+    object-fit: cover;
+    height: 300px; /* only if you want fixed height */
+}
