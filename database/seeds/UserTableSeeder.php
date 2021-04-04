@@ -17,7 +17,7 @@ class UserTableSeeder extends Seeder
             'name' => 'Safal Pokharel',
             'email' => 'admin@admin.com',
             'password' => bcrypt('password'),
-            'is_admin' => "1"
+            'is_admin' => true
         ]);
     }
 }

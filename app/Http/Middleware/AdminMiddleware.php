@@ -16,7 +16,7 @@ class AdminMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if(Auth::user()->is_admin !== "1"){
+        if(!Auth::user()->is_admin){
             return response()->json(['error' => 'Something went wrong.'], 403);
         }
         return $next($request);
