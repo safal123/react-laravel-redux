@@ -11,7 +11,7 @@ const Cart = ({cart, clearCart, increaseItem, decreaseItem, removeFromCart}) => 
     return (
         <Fragment>
             <Container className={"mt-2"}>
-                <Card style={{borderRadius: "0px"}}>
+                <Card style={{borderRadius: "0px"}} className={"shadow"}>
                     <Card.Header>
                         Your cart.
                     </Card.Header>
@@ -71,8 +71,8 @@ const Cart = ({cart, clearCart, increaseItem, decreaseItem, removeFromCart}) => 
                             <h1>Your cart is empty.</h1>
                         }
                         <div className={"d-flex align-items-center justify-content-between"}>
-                            <Link to={"/"} className={"btn btn-info"}>Continue
-                                Shopping
+                            <Link to={"/"} className={"btn btn-info"}>
+                                Continue Shopping
                             </Link>
 
                             {cart.items.length > 0 &&

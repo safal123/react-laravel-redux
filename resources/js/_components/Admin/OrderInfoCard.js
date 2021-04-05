@@ -9,7 +9,7 @@ const OrderInfoCard = ({orders}) => {
             bg={'success'}
             text={'white'}
             style={{width: '18rem'}}
-            className="mb-2"
+            className="mb-2 w-100"
         >
             <Card.Header>Orders</Card.Header>
             <Card.Body>

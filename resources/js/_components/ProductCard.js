@@ -14,12 +14,6 @@ const ProductCard = ({ product, addToCart }) =>{
             />
             <Card.Body>
                 <Card.Title className={"text-info"}>{product.name}</Card.Title>
-                {/*<Card.Text>*/}
-                {/*    { product.description.substr(0, 30) } ....*/}
-                {/*    <span>*/}
-                {/*        <a href="#" className={"text-muted"}>View more</a>*/}
-                {/*    </span>*/}
-                {/*</Card.Text>*/}
                 <div className={"d-flex justify-content-between border-top"}>
                     <Button
                         variant="none"

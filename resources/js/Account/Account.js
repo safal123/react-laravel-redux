@@ -16,9 +16,9 @@ const Account = ({logout, alertError}) => {
                     setOrders(response.data);
                 }).catch(error => {
                     alertError(error.response.statusText);
-                    // if (error.response.status === 401) {
-                    //     logout();
-                    // }
+                    if (error.response.status === 401) {
+                        // logout();
+                    }
                 })
             } catch (e) {
                 console.log(e);
@@ -27,7 +27,7 @@ const Account = ({logout, alertError}) => {
         fetchOrders();
     }, [])
     if (!orders) {
-        return <div className={"homePageSpinner"} style={{
+        return <div className={"homePageSpinner vh-100"} style={{
             position: "fixed",
             zIndex: "1000",
         }}>
@@ -35,10 +35,14 @@ const Account = ({logout, alertError}) => {
         </div>
     }
     if(orders.length === 0){
-        return <div className={"container"}>You don't have any orders yet.</div>
+        return <div className={"container bg-white shadow p-4 mt-4"}>
+            <h1 className={'text-info'}>You don't have any orders yet.</h1>
+            <hr/>
+            <Link to="/">Go to home page</Link>
+        </div>
     }
     return (
-        <div className={"container mt-2"}>
+        <div className={"container mt-2 bg-info vh-100"}>
             <div className={"card"}>
                 {/*<div className="card-header">*/}
                 {/*    You have {orders && orders.length} orders.*/}

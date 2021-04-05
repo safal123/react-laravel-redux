@@ -9,7 +9,7 @@ const UserInfoCard = ({users}) => {
             bg={'info'}
             text={'white'}
             style={{width: '18rem'}}
-            className="mb-2"
+            className="mb-2 w-100"
         >
             <Card.Header>Users</Card.Header>
             <Card.Body>

@@ -18,8 +18,9 @@ import {ForgetPassword} from "../ForgetPassword";
 import {PasswordReset} from "../PasswordReset";
 import Dashboard from "../Admin/Dashboard";
 import AdminRoute from "../_components/Route/AdminRoute";
-import AddNewProduct from "../Products/AddNewProduct";
+import AddNewProduct from "../Admin/Products/AddNewProduct";
 import ErrorPage from "../Error/ErrorPage";
+import Index from "../Admin/Products";
 
 
 function App({alert, clear}) {
@@ -40,6 +41,7 @@ function App({alert, clear}) {
                 <PrivateRoute path={"/checkout"} exact={true} component={Checkout}/>
                 <PrivateRoute path={"/account"} exact={true} component={Account}/>
                 <AdminRoute path={"/admin"} exact={true} component={Dashboard}/>
+                <AdminRoute path={"/products"} exact={true} component={Index} />
                 <AdminRoute path={"/products/new"} exact={true} component={AddNewProduct} />
                 <Redirect from="*" to="/"/>
             </Switch>

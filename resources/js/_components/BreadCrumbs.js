@@ -8,7 +8,6 @@ const BreadCrumbs = ({parent, child1, clild2}) =>{
             <Breadcrumb.Item href="">
                 {child1}
             </Breadcrumb.Item>
-            <Breadcrumb.Item active>{clild2}</Breadcrumb.Item>
         </Breadcrumb>
     );
 }

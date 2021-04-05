@@ -27,7 +27,7 @@ const Admin = () => {
                             <Link to="/admin" className="list-group-item list-group-item-action bg-light">
                                 Dashboard
                             </Link>
-                            <Link to="/products/new" className="list-group-item list-group-item-action bg-light">
+                            <Link to="/products" className="list-group-item list-group-item-action bg-light">
                                 Products
                             </Link>
                             <Link to="/orders" className="list-group-item list-group-item-action bg-light">

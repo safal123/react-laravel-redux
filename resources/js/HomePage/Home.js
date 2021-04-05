@@ -11,6 +11,7 @@ const Home = ({allProducts, products, addToCart}) => {
     useEffect(() => {
         allProducts();
     }, [])
+
     if (!products) {
         return <div className={"homePageSpinner"}>
             <Spinner animation="border"/>
@@ -20,7 +21,9 @@ const Home = ({allProducts, products, addToCart}) => {
         <Container className={"mt-0"}>
             <Row className="">
                 {products &&
-                products.map(product => (
+                products
+                    .filter(product => product.is_active === "1")
+                    .map(product => (
                     <Col md={4} lg={4} xs={12} className="p-1" key={product.id}>
                         <ProductCard product={product} addToCart={addToCart}/>
                     </Col>

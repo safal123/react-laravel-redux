@@ -32,5 +32,6 @@ Route::middleware(['auth:api'])->group( function (){
     Route::get('orders', 'Api\OrderController@index');
     Route::post('products', 'Api\ProductController@store')->middleware('admin:api');
     Route::delete('products/{id}', 'Api\ProductController@delete')->middleware('admin:api');
+    Route::put('products/{id}/make-active', 'Api\ProductController@makeActive')->middleware('admin:api');
 });
 
