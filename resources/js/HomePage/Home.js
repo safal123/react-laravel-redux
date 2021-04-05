@@ -22,7 +22,7 @@ const Home = ({allProducts, products, addToCart}) => {
             <Row className="">
                 {products &&
                 products
-                    .filter(product => product.is_active === 1)
+                    .filter(product => product.is_active)
                     .map(product => (
                     <Col md={4} lg={4} xs={12} className="p-1" key={product.id}>
                         <ProductCard product={product} addToCart={addToCart}/>
