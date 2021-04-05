@@ -15,9 +15,6 @@ class CheckoutController extends Controller
 {
     public function __construct(Request $request)
     {
-//        if ($request->header('Authorization')) {
-//            $this->middleware('client.credentials')->only(['checkout']);
-//        }
     }
 
     public function checkout(Request $request)

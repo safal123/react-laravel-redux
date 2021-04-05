@@ -22,15 +22,16 @@ const Home = ({allProducts, products, addToCart}) => {
             <Row className="">
                 {products &&
                 products
-                    .filter(product => product.is_active === "1")
+                    .filter(product => product.is_active === 1)
                     .map(product => (
                     <Col md={4} lg={4} xs={12} className="p-1" key={product.id}>
                         <ProductCard product={product} addToCart={addToCart}/>
                     </Col>
                 ))
                 }
-                <div className={'bg-info w-100 px-2 mx-1'}>
-                    <h1>Latest Products</h1>
+                <div className={'bg-white shadow w-100 px-2 mx-1 d-flex justify-content-between align-items-center'}>
+                    <h4 className={'text-info px-2 py-2 mt-2'}>Latest Products</h4>
+                    <h4 className={'text-info px-2 py-2 mt-2'}>View By Category</h4>
                 </div>
             </Row>
         </Container>
