@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 const PrivateRoute = ({ component: Component, auth, ...rest }) => (
     <Route {...rest} render={props => (
-        auth.isLoggedIn && auth.user.id === 1
+        auth.isLoggedIn && auth.user.email === 'pokharelsafal66@gmail.com'
             ? <Component {...props} />
             : <Redirect to={{ pathname: '/login', state: { from: props.location } }} />
     )} />

@@ -6,11 +6,11 @@ import storage from 'redux-persist/lib/storage';
 
 const middleware = [ thunk ];
 
-let devTools = window.__REDUX_DEVTOOLS_EXTENSION__ &&
-    window.__REDUX_DEVTOOLS_EXTENSION__();
-if (process.env.NODE_ENV === 'prod' || process.env.NODE_ENV === 'production') {
-    devTools = a => a;
-}
+// let devTools = window.__REDUX_DEVTOOLS_EXTENSION__ &&
+//     window.__REDUX_DEVTOOLS_EXTENSION__();
+// if (process.env.NODE_ENV === 'prod' || process.env.NODE_ENV === 'production') {
+//     devTools = a => a;
+// }
 
 const persistConfig = {
     key: 'root',
@@ -23,7 +23,7 @@ const persistedReducer = persistReducer(persistConfig, rootReducer)
 export default () => {;
     let store = createStore(
         persistedReducer,
-        compose(applyMiddleware(...middleware), devTools)
+        compose(applyMiddleware(...middleware))
     );
     let persist = persistStore(store);
     return { store,  persist };

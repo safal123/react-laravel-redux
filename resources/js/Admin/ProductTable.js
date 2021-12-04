@@ -4,13 +4,6 @@ import {Spinner} from "react-bootstrap";
 import SmallSpinner from "../_components/SmallSpinner";
 
 const ProductTable = ({products, deleteProduct, makeProductActive, isLoading}) => {
-
-    if (!products) {
-        return <div className={'text-center text-primary'}>
-            <Spinner animation="border"/>
-            <p>Please wait...s</p>
-        </div>;
-    }
     return (
         <div className={"vw-100"}>
             <table className="table table-hover">
@@ -41,16 +34,12 @@ const ProductTable = ({products, deleteProduct, makeProductActive, isLoading}) =
                         />
                     </td>
                     <td>
-                        <a className={'px-1 py-1 text-white text-muted'}>
-                            <select onChange={() =>makeProductActive(product.id)} className={'text-muted'} name="status" value={product.is_active} id="status">
-                                <option value="1">Active</option>
-                                <option value="0">Inactive</option>
+                        <a className={'p-4 text-white text-muted'}>
+                            <select onChange={() =>makeProductActive(product.id)} className={'text-muted px-4'} name="status" value={product.is_active} id="status">
+                              <option value='true'>Active</option>
+                              <option value='false'>Inactive</option>
                             </select>
-                            {isLoading ? <SmallSpinner text={"Please wait.."}/>:""}
-                            {/*{ product.is_active === false ?*/}
-                            {/*    <a href="" className={'ml-2'}>Make Inactive</a> :*/}
-                            {/*    <a href="" className={"ml-2"}>Make Active</a>*/}
-                            {/*}*/}
+                          {isLoading && product.id ? <SmallSpinner text={"Please wait.."}/>:""}
                         </a>
                     </td>
                     <td>

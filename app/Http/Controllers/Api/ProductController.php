@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\ProductResource;
 use App\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -12,7 +13,7 @@ class ProductController extends Controller
 {
     public function index()
     {
-        return response()->json(['products' => Product::orderBy('created_at', 'desc')->get()]);
+        return response()->json(['products' => new ProductResource(Product::orderBy('created_at', 'desc')->get())]);
     }
 
     public function get($id)

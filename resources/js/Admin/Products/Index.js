@@ -35,9 +35,9 @@ const Index = ({products, allProducts, info, logout}) => {
         );
     }
 
-    const makeProductActive = (id) =>{
+    const makeProductActive = async (id) =>{
         setIsLoading(true);
-        api().put(`/products/${id}/make-active`).then(response => {
+        await api().put(`/products/${id}/make-active`).then(() => {
             info("Product updated successfully.");
             setIsLoading(false);
             allProducts();
@@ -74,11 +74,13 @@ const Index = ({products, allProducts, info, logout}) => {
                     </div>
                 </div>
                 <div className={"card-body"}>
-                    {products ? <ProductTable
-                            products={filterProducts(products)}
-                            deleteProduct={deleteProduct}
-                            isLoading={isLoading}
-                            makeProductActive={makeProductActive}/> :
+                    {products ?
+                        <ProductTable
+                          products={filterProducts(products)}
+                          deleteProduct={deleteProduct}
+                          isLoading={isLoading}
+                          makeProductActive={makeProductActive}/> 
+                      :
                         <div className={'text-center text-primary vh-100'}>
                             <Spinner animation="border"/>
                         </div>

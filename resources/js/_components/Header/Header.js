@@ -10,7 +10,7 @@ import Admin from "./Admin";
 const Header = ({auth, logout, cartTotalItems}) => {
     return (
         <Fragment>
-            {auth.user && auth.user.id === 1 ?
+            {auth.user && auth.user.email === 'pokharelsafal66@gmail.com' ?
                 <Admin/>
                 : ''
             }
