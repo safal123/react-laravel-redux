@@ -13,7 +13,7 @@ class ProductController extends Controller
 {
     public function index()
     {
-        return response()->json(['products' => new ProductResource(Product::orderBy('created_at', 'desc')->get())]);
+        return response()->json(['products' =>  ProductResource::collection(Product::orderBy('created_at', 'desc')->get())]);
     }
 
     public function get($id)
