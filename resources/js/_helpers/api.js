@@ -2,7 +2,7 @@ import axios  from 'axios';
 
 let baseApi = axios.create({
     baseURL: process.env.NODE_ENV === 'development'
-        ? "http://localhost:8001/api/"
+        ? "http://localhost:8000/api/"
         : "https://laravel-react-redux.herokuapp.com/api",
 })
 
